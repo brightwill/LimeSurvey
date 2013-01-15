@@ -1,7 +1,7 @@
 <?php
 if ( !defined('BASEPATH')) exit('No direct script access allowed');
 /*
-* LimeSurvey
+ * LimeSurvey
 * Copyright (C) 2007-2011 The LimeSurvey Project Team / Carsten Schmitz
 * All rights reserved.
 * License: GNU/GPL License v2 or later, see LICENSE.php
@@ -15,104 +15,106 @@ if ( !defined('BASEPATH')) exit('No direct script access allowed');
 */
 
 /**
- * 
+ *
  * @param type $sql
  * @param type $inputarr
  * @param type $silent
  * @return CDbDataReader
- */
+*/
 function dbExecuteAssoc($sql,$inputarr=false,$silent=true)
 {
-    $error = '';
-    try {
-        if($inputarr)
-        {
-            $dataset=Yii::app()->db->createCommand($sql)->bindValues($inputarr)->query();	//Checked
-        }
-        else
-        {
-            $dataset=Yii::app()->db->createCommand($sql)->query();
+	$error = '';
+	try {
+		if($inputarr)
+		{
+			$dataset=Yii::app()->db->createCommand($sql)->bindValues($inputarr)->query();	//Checked
+		}
+		else
+		{
+			$dataset=Yii::app()->db->createCommand($sql)->query();
 
-        }
-    } catch(CDbException $e) {
-        $error = $e->getMessage();
-        $dataset=false;
-    }
+		}
+	} catch(CDbException $e) {
+		$error = $e->getMessage();
+		$dataset=false;
+	}
 
-    if (!$dataset && (Yii::app()->getConfig('debug') >0 || !$silent))
-    {
-        safeDie('Error executing query in dbExecuteAssoc:'.$error);
-    }
-    return $dataset;
+	if (!$dataset && (Yii::app()->getConfig('debug') >0 || !$silent))
+	{
+		safeDie('Error executing query in dbExecuteAssoc:'.$error);
+	}
+	return $dataset;
 }
 
 
 function dbQueryOrFalse($sql)
 {
-    try {
-        $dataset=Yii::app()->db->createCommand($sql)->query();
-    } catch(CDbException $e) {
-        $dataset=false;
-    }
-    return $dataset;
+	try {
+		$dataset=Yii::app()->db->createCommand($sql)->query();
+	} catch(CDbException $e) {
+		$dataset=false;
+	}
+	return $dataset;
 }
 
 
 function dbSelectLimitAssoc($sql,$numrows=0,$offset=0,$inputarr=false,$dieonerror=true)
 {
-    $query = Yii::app()->db->createCommand($sql.= " ");
-    if ($numrows)
-    {
-        if ($offset)
-        {
-            $query->limit($numrows, $offset);
-        }
-        else
-        {
-            $query->limit($numrows, 0);
-        }
-    }
-    if($inputarr)
-    {
-        $query->bindValues($inputarr);    //Checked
-    }
-    try
-    {
-        $dataset=$query->query();
-    }
-    catch (CDbException $e)
-    {
-        $dataset=false;
-    }
-    if (!$dataset && $dieonerror) {safeDie('Error executing query in dbSelectLimitAssoc:'.$query->text);}
-    return $dataset;
+	$query = Yii::app()->db->createCommand($sql.= " ");
+	if ($numrows)
+	{
+		if ($offset)
+		{
+			$query->limit($numrows, $offset);
+		}
+		else
+		{
+			$query->limit($numrows, 0);
+		}
+	}
+	if($inputarr)
+	{
+		$query->bindValues($inputarr);    //Checked
+	}
+	try
+	{
+		$dataset=$query->query();
+	}
+	catch (CDbException $e)
+	{
+		$dataset=false;
+	}
+	if (!$dataset && $dieonerror) {
+		safeDie('Error executing query in dbSelectLimitAssoc:'.$query->text);
+	}
+	return $dataset;
 }
 
 
 /**
-* This functions quotes fieldnames accordingly
-*
-* @param mixed $id Fieldname to be quoted
-*/
+ * This functions quotes fieldnames accordingly
+ *
+ * @param mixed $id Fieldname to be quoted
+ */
 
 function dbQuoteID($id)
 {
-    switch (Yii::app()->db->getDriverName())
-    {
-        case "mysqli" :
-        case "mysql" :
-            return "`".$id."`";
-            break;
-        case "mssql" :
-        case "sqlsrv" :
-            return "[".$id."]";
-            break;
-        case "pgsql":
-            return "\"".$id."\"";
-            break;
-        default:
-            return $id;
-    }
+	switch (Yii::app()->db->getDriverName())
+	{
+		case "mysqli" :
+		case "mysql" :
+			return "`".$id."`";
+			break;
+		case "mssql" :
+		case "sqlsrv" :
+			return "[".$id."]";
+			break;
+		case "pgsql":
+			return "\"".$id."\"";
+			break;
+		default:
+			return $id;
+	}
 }
 
 /**
@@ -122,102 +124,102 @@ function dbQuoteID($id)
  */
 function dbRandom()
 {
-    $driver = Yii::app()->db->getDriverName();
+	$driver = Yii::app()->db->getDriverName();
 
-    // Looked up supported db-types in InstallerConfigForm.php
-    // Use below statement to find them
-    //$configForm = new InstallerConfigForm();
-    //$dbTypes    = $configForm->db_names; //Supported types are in this array
+	// Looked up supported db-types in InstallerConfigForm.php
+	// Use below statement to find them
+	//$configForm = new InstallerConfigForm();
+	//$dbTypes    = $configForm->db_names; //Supported types are in this array
 
-    switch ($driver)
-    {
-        case 'mssql':
-        case 'sqlsrv':
-            $srandom='NEWID()';
-            break;
+	switch ($driver)
+	{
+		case 'mssql':
+		case 'sqlsrv':
+			$srandom='NEWID()';
+			break;
 
-        case 'pgsql':
-            $srandom='RANDOM()';
-            break;
+		case 'pgsql':
+			$srandom='RANDOM()';
+			break;
 
-        case 'mysql':
-        case 'mysqli':
-            $srandom='RAND()';
-            break;
+		case 'mysql':
+		case 'mysqli':
+			$srandom='RAND()';
+			break;
 
-        default:
-            //Some db type that is not mentioned above, could fail and if so should get an entry above.
-            $srandom= 0 + lcg_value()*(abs(1));
-            break;
-    }
+		default:
+			//Some db type that is not mentioned above, could fail and if so should get an entry above.
+			$srandom= 0 + lcg_value()*(abs(1));
+			break;
+	}
 
-    return $srandom;
+	return $srandom;
 
 }
 
 /**
-*  Return a sql statement for finding LIKE named tables
-*  Be aware that you have to escape underscor chars by using a backslash
-* otherwise you might get table names returned you don't want
-*
-* @param mixed $table
-*/
+ *  Return a sql statement for finding LIKE named tables
+ *  Be aware that you have to escape underscor chars by using a backslash
+ * otherwise you might get table names returned you don't want
+ *
+ * @param mixed $table
+ */
 function dbSelectTablesLike($table)
 {
-    switch (Yii::app()->db->getDriverName()) {
-        case 'mysqli':
-        case 'mysql' :
-            return "SHOW TABLES LIKE '$table'";
-        case 'mssql' :
-        case 'sqlsrv' :
-            return "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES where TABLE_TYPE='BASE TABLE' and TABLE_NAME LIKE '$table' ESCAPE '\'";
-        case 'pgsql' :
-            return "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' and table_name like '$table'";
-        default: safeDie ("Couldn't create 'select tables like' query for connection type '".Yii::app()->db->getDriverName()."'");
-    }
+	switch (Yii::app()->db->getDriverName()) {
+		case 'mysqli':
+		case 'mysql' :
+			return "SHOW TABLES LIKE '$table'";
+		case 'mssql' :
+		case 'sqlsrv' :
+			return "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES where TABLE_TYPE='BASE TABLE' and TABLE_NAME LIKE '$table' ESCAPE '\'";
+		case 'pgsql' :
+			return "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' and table_name like '$table'";
+		default: safeDie ("Couldn't create 'select tables like' query for connection type '".Yii::app()->db->getDriverName()."'");
+	}
 }
 
 /**
-* Gets the table names. Do not prefix.
-* @param string $table String to match
-* @uses dbSelectTablesLike() To get the tables like sql query
-* @return array Array of matched table names
-*/
+ * Gets the table names. Do not prefix.
+ * @param string $table String to match
+ * @uses dbSelectTablesLike() To get the tables like sql query
+ * @return array Array of matched table names
+ */
 function dbGetTablesLike($table)
 {
-    return (array) Yii::app()->db->createCommand(dbSelectTablesLike("{{{$table}}}"))->queryAll();
+	return (array) Yii::app()->db->createCommand(dbSelectTablesLike("{{{$table}}}"))->queryAll();
 }
 
 /**
-* Creates a table using the YII DB Schema function but properly handles custom field types for the various DB types
-*
-* @param mixed $sTableName
-* @param mixed $aColumns
-* @param mixed $sOptions
-*/
+ * Creates a table using the YII DB Schema function but properly handles custom field types for the various DB types
+ *
+ * @param mixed $sTableName
+ * @param mixed $aColumns
+ * @param mixed $sOptions
+ */
 function createTable($sTableName, $aColumns, $sOptions=null)
 {
-    $sDBDriverName=Yii::app()->db->getDriverName();
+	$sDBDriverName=Yii::app()->db->getDriverName();
 
-    if ($sDBDriverName=='sqlsrv' || $sDBDriverName=='mssql')
-    {
-        foreach ($aColumns as $sName=>&$sType)
-        {
-            $sType=str_replace('text','varchar(max)',$sType);
-            $sType=str_replace('binary','text',$sType);
-        }
-    }
-    if ($sDBDriverName=='pgsql')
-    {
-        foreach ($aColumns as $sName=>&$sType)
-        {
-            $sType=str_replace('varchar','character varying',$sType);
-        }
-    }
-    if (Yii::app()->db->driverName == 'mysql' || Yii::app()->db->driverName == 'mysqli')
-    {
-        if (is_null($sOptions))
-        $sOptions='ENGINE=MyISAM';
-    }    
-    Yii::app()->db->createCommand()->createTable($sTableName,$aColumns,$sOptions);
+	if ($sDBDriverName=='sqlsrv' || $sDBDriverName=='mssql')
+	{
+		foreach ($aColumns as $sName=>&$sType)
+		{
+			$sType=str_replace('text','varchar(max)',$sType);
+			$sType=str_replace('binary','text',$sType);
+		}
+	}
+	if ($sDBDriverName=='pgsql')
+	{
+		foreach ($aColumns as $sName=>&$sType)
+		{
+			$sType=str_replace('varchar','character varying',$sType);
+		}
+	}
+	if (Yii::app()->db->driverName == 'mysql' || Yii::app()->db->driverName == 'mysqli')
+	{
+		if (is_null($sOptions))
+			$sOptions='ENGINE=MyISAM';
+	}
+	Yii::app()->db->createCommand()->createTable($sTableName,$aColumns,$sOptions);
 }

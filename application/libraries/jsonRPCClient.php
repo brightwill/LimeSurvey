@@ -1,6 +1,6 @@
 <?php
 /*
-					COPYRIGHT
+ COPYRIGHT
 
 Copyright 2007 Sergio Vaccaro <sergio@inservibile.org>
 
@@ -79,9 +79,9 @@ class jsonRPCClient {
 	 */
 	public function setRPCNotification($notification) {
 		empty($notification) ?
-							$this->notification = false
-							:
-							$this->notification = true;
+		$this->notification = false
+		:
+		$this->notification = true;
 	}
 
 	/**
@@ -115,22 +115,22 @@ class jsonRPCClient {
 
 		// prepares the request
 		$request = array(
-						'method' => $method,
-						'params' => $params,
-						'id' => $currentId
-						);
+			'method' => $method,
+			'params' => $params,
+			'id' => $currentId
+		);
 		$request = json_encode($request);
 		$this->debug && $this->debug.='***** Request *****'."\n".$request."\n".'***** End Of request *****'."\n\n";
 
 		// performs the HTTP POST
 		$opts = array ('http' => array (
-							'method'  => 'POST',
-							'header'  => 'Content-type: application/json',
-							'content' => $request
-							));
+			'method'  => 'POST',
+			'header'  => 'Content-type: application/json',
+			'content' => $request
+		));
 		$context  = stream_context_create($opts);
 		if ($fp = fopen($this->url, 'r', false, $context)) {
-            stream_set_timeout($fp, 120);
+			stream_set_timeout($fp, 120);
 			$response = '';
 			while($row = fgets($fp)) {
 				$response.= trim($row)."\n";
@@ -144,7 +144,7 @@ class jsonRPCClient {
 		// debug output
 		if ($this->debug) {
 			echo nl2br($this->debug);
-            $this->debug = true;
+			$this->debug = true;
 		}
 
 		// final checks and return
@@ -163,9 +163,9 @@ class jsonRPCClient {
 			return true;
 		}
 	}
-        
-        public function call($method, $params) {
-            return $this->__call($method, $params);
-        }
+
+	public function call($method, $params) {
+		return $this->__call($method, $params);
+	}
 }
 ?>

@@ -44,7 +44,7 @@ class CList extends CComponent implements IteratorAggregate,ArrayAccess,Countabl
 	private $_d=array();
 	/**
 	 * @var integer number of items
-	 */
+	*/
 	private $_c=0;
 	/**
 	 * @var boolean whether this list is read-only

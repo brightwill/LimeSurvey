@@ -1,17 +1,17 @@
 <?php
 /*
  * LimeSurvey
- * Copyright (C) 2007-2011 The LimeSurvey Project Team / Carsten Schmitz
- * All rights reserved.
- * License: GNU/GPL License v2 or later, see LICENSE.php
- * LimeSurvey is free software. This version may have been modified pursuant
- * to the GNU General Public License, and as distributed it includes or
- * is derivative of works licensed under the GNU General Public License or
- * other free or open source software licenses.
- * See COPYRIGHT.php for copyright notices and details.
- *
- *	$Id$
- */
+* Copyright (C) 2007-2011 The LimeSurvey Project Team / Carsten Schmitz
+* All rights reserved.
+* License: GNU/GPL License v2 or later, see LICENSE.php
+* LimeSurvey is free software. This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*
+*	$Id$
+*/
 
 /**
  * Modify these two lines to point to your TCPDF installation
@@ -30,7 +30,7 @@ require_once($tcpdf['base_directory'].'/config/lang/eng.php');
  * @link      http://www.acspri.org.au/software
  * @link      http://quexml.sourceforge.net
  * @link      http://quexf.sourceforge.net
- */
+*/
 class quexmlpdf extends pdf {
 
 	/**
@@ -338,7 +338,7 @@ class quexmlpdf extends pdf {
 	 *
 	 * @var mixed  Defaults to 24.
 	 * @since 2010-09-20
-         * @deprecated
+	 * @deprecated
 	 * @see $textResponseMarginX
 	 */
 	//protected $textResponsesPerLine = 24;
@@ -425,7 +425,7 @@ class quexmlpdf extends pdf {
 	 *
 	 * @var array  Defaults to empty array
 	 * @since 2010-09-02
-	 */
+	*/
 	protected $section = array();
 
 	/**
@@ -434,7 +434,7 @@ class quexmlpdf extends pdf {
 	 *
 	 * @var string  Defaults to array().
 	 * @since 2012-01-31
-	 */
+	*/
 	protected $skipToRegistry = array();
 
 	/**
@@ -442,7 +442,7 @@ class quexmlpdf extends pdf {
 	 *
 	 * @var mixed  Defaults to "".
 	 * @since 2010-09-02
-	 */
+	*/
 	protected $layoutCP = "";
 
 	/**
@@ -481,7 +481,7 @@ class quexmlpdf extends pdf {
 	 *
 	 * @var bool  Defaults to array(200,200,200).
 	 * @since 2010-09-20
-	 */
+	*/
 	protected $backgroundColourSection = array(221);
 
 	/**
@@ -489,7 +489,7 @@ class quexmlpdf extends pdf {
 	 *
 	 * @var bool  Defaults to array(255,255,255).
 	 * @since 2010-09-20
-	 */
+	*/
 	protected $backgroundColourEmpty = array(255);
 
 	/**
@@ -497,7 +497,7 @@ class quexmlpdf extends pdf {
 	 *
 	 * @var mixed  Defaults to array(0,0,0).
 	 * @since 2010-09-20
-	 */
+	*/
 	protected $lineColour = array(0);
 
 	/**
@@ -505,7 +505,7 @@ class quexmlpdf extends pdf {
 	 *
 	 * @var mixed  Defaults to 0.
 	 * @since 2012-04-16
-	 */
+	*/
 	protected $textColour = 0;
 
 
@@ -695,13 +695,13 @@ class quexmlpdf extends pdf {
 	{
 		$this->boxGroupCP++;
 		$this->layout[$this->layoutCP]['boxgroup'][$this->boxGroupCP] =
-			array(	'type' => $type,
-				'width' => $width,
-				'varname' => $varname,
-				'sortorder' => $this->boxGroupCP,
-				'label' => $label,
-				'groupsection' => $this->sectionCP,
-				'box' => array());
+		array(	'type' => $type,
+			'width' => $width,
+			'varname' => $varname,
+			'sortorder' => $this->boxGroupCP,
+			'label' => $label,
+			'groupsection' => $this->sectionCP,
+			'box' => array());
 	}
 
 	/**
@@ -735,13 +735,13 @@ class quexmlpdf extends pdf {
 	{
 		$this->boxCP++;
 		$this->layout[$this->layoutCP]['boxgroup'][$this->boxGroupCP]['box'][] =
-			array(	'tlx' => $this->mm2px($tlx),
-				'tly' => $this->mm2px($tly),
-				'brx' => $this->mm2px($brx),
-				'bry' => $this->mm2px($bry),
-				'value' => $value,
-				'label'=> $label,
-				);
+		array(	'tlx' => $this->mm2px($tlx),
+			'tly' => $this->mm2px($tly),
+			'brx' => $this->mm2px($brx),
+			'bry' => $this->mm2px($bry),
+			'value' => $value,
+			'label'=> $label,
+		);
 
 		//Update the width of the parent boxgroup given its type and this additional box
 		$type = $this->layout[$this->layoutCP]['boxgroup'][$this->boxGroupCP]['type'];
@@ -949,11 +949,11 @@ class quexmlpdf extends pdf {
 
 	/*
 	 * The X coordinate of the start of the page proper
-	 *
-	 * @return int The X coordinate of the start of the page
-	 * @author Adam Zammit <adam.zammit@acspri.org.au>
-	 * @since  2010-09-02
-	 */
+	*
+	* @return int The X coordinate of the start of the page
+	* @author Adam Zammit <adam.zammit@acspri.org.au>
+	* @since  2010-09-02
+	*/
 	public function getMainPageX()
 	{
 		return ($this->cornerBorder + $this->cornerWidth);
@@ -1190,7 +1190,9 @@ class quexmlpdf extends pdf {
 				foreach ($qu->text as $ttmp)
 				{
 					//Add a new line if we aren't at the end
-					if ($ttmp != end($qu->text)){ $qtmp['text'] .= "<br/>"; }
+					if ($ttmp != end($qu->text)){
+						$qtmp['text'] .= "<br/>";
+					}
 
 					$qtmp['text'] .= $ttmp;
 				}
@@ -1356,27 +1358,27 @@ class quexmlpdf extends pdf {
 			//start from the second question as first is linked to the section (if there is a question in this section)
 			if ($questions != 0)
 			{
-			foreach(array_slice($sv['questions'], 1) as $qk => $qv)
-			{
-				$this->startTransaction();
-				//add question here
-				$this->createQuestion($qv);
-				if ($this->pageBreakOccured)
+				foreach(array_slice($sv['questions'], 1) as $qk => $qv)
 				{
-					$this->pageBreakOccured = false;
-					$this->rollBackTransaction(true);
-					$this->SetAutoPageBreak(false); //Temporarily set so we don't trigger a page break
-					//now draw a background to the bottom of the page
-					$this->fillPageBackground();
-
-					$this->newPage();
-					//retry question here
+					$this->startTransaction();
+					//add question here
 					$this->createQuestion($qv);
+					if ($this->pageBreakOccured)
+					{
+						$this->pageBreakOccured = false;
+						$this->rollBackTransaction(true);
+						$this->SetAutoPageBreak(false); //Temporarily set so we don't trigger a page break
+						//now draw a background to the bottom of the page
+						$this->fillPageBackground();
+
+						$this->newPage();
+						//retry question here
+						$this->createQuestion($qv);
+					}
+					else
+						$this->commitTransaction();
 				}
-				else
-					$this->commitTransaction();
 			}
-		}
 		}
 
 
@@ -1469,86 +1471,88 @@ class quexmlpdf extends pdf {
 		if (isset($question['text'])) $text = $question['text'];
 
 		//Loop over response groups and produce questions of various types
-		if (isset($question['responses'])) { foreach($question['responses'] as $r)
-		{
-			$varname = $r['varname'];
-
-			if (isset($r['subquestions']))
+		if (isset($question['responses'])) {
+			foreach($question['responses'] as $r)
 			{
-				$response = $r['response'];
-				$subquestions = $r['subquestions'];
-				$type = $response['type'];
+				$varname = $r['varname'];
 
-				$bgtype = 3; //box group type temp set to 3 (text)
-
-				switch ($type)
+				if (isset($r['subquestions']))
 				{
-					case 'fixed':
-						$categories = $response['categories'];
+					$response = $r['response'];
+					$subquestions = $r['subquestions'];
+					$type = $response['type'];
 
-						if (isset($response['rotate']))
-							$this->drawSingleChoiceVertical($categories,$subquestions,$text);
-						else
-							$this->drawSingleChoiceHorizontal($categories,$subquestions,$text);
+					$bgtype = 3; //box group type temp set to 3 (text)
 
-						break;
-					case 'number':
-						$bgtype = 4;
-					case 'currency':
-					case 'text':
-						if (isset($response['rotate']))
-							$this->drawMatrixTextHorizontal($subquestions,$response['width'],$text,$bgtype);
-						else
-							$this->drawMatrixTextVertical($subquestions,$response['width'],$text,$bgtype);
-						break;
-					case 'vas':
-						$this->drawMatrixVas($subquestions,$text,$response['labelleft'],$response['labelright']);
-						break;
+					switch ($type)
+					{
+						case 'fixed':
+							$categories = $response['categories'];
 
+							if (isset($response['rotate']))
+								$this->drawSingleChoiceVertical($categories,$subquestions,$text);
+							else
+								$this->drawSingleChoiceHorizontal($categories,$subquestions,$text);
+
+							break;
+						case 'number':
+							$bgtype = 4;
+						case 'currency':
+						case 'text':
+							if (isset($response['rotate']))
+								$this->drawMatrixTextHorizontal($subquestions,$response['width'],$text,$bgtype);
+							else
+								$this->drawMatrixTextVertical($subquestions,$response['width'],$text,$bgtype);
+							break;
+						case 'vas':
+							$this->drawMatrixVas($subquestions,$text,$response['labelleft'],$response['labelright']);
+							break;
+
+					}
 				}
-			}
-			else
-			{
-				$response = $r['response'];
-				$type = $response['type'];
-
-				if (isset($response['text']) && !empty($response['text']))
-					$rtext = $text .  $this->subQuestionTextSeparator .  $response['text'];
 				else
-					$rtext = $text;
-
-				$bgtype = 3; //box group type temp set to 3 (text)
-
-				switch ($type)
 				{
-					case 'fixed':
-						if (isset($response['rotate']))
-							$this->drawSingleChoiceHorizontal($response['categories'],array(array('text' => '', 'varname' => $varname)),$rtext);
-						else
-							$this->drawSingleChoiceVertical($response['categories'],array(array('text' => '', 'varname' => $varname)),$rtext);
-						break;
-					case 'longtext':
-						$this->addBoxGroup(6,$varname,$rtext);
-						$this->drawLongText($response['width']);
-						break;
-					case 'number':
-						$bgtype = 4;
-					case 'currency':
-					case 'text':
-						$this->addBoxGroup($bgtype,$varname,$rtext,$response['width']);
-						$this->drawText($response['text'],$response['width']);
-						//Insert a gap here
-						$this->Rect($this->getMainPageX(),$this->GetY(),$this->getMainPageWidth(),$this->subQuestionLineSpacing,'F',array(),$this->backgroundColourQuestion);
-						$this->SetY($this->GetY() + $this->subQuestionLineSpacing,false);
-						break;
-					case 'vas':
-						$this->addBoxGroup(1,$varname,$rtext,strlen($this->vasIncrements));
-						$this->drawVas("",$response['labelleft'],$response['labelright']);
-						break;
+					$response = $r['response'];
+					$type = $response['type'];
 
+					if (isset($response['text']) && !empty($response['text']))
+						$rtext = $text .  $this->subQuestionTextSeparator .  $response['text'];
+					else
+						$rtext = $text;
+
+					$bgtype = 3; //box group type temp set to 3 (text)
+
+					switch ($type)
+					{
+						case 'fixed':
+							if (isset($response['rotate']))
+								$this->drawSingleChoiceHorizontal($response['categories'],array(array('text' => '', 'varname' => $varname)),$rtext);
+							else
+								$this->drawSingleChoiceVertical($response['categories'],array(array('text' => '', 'varname' => $varname)),$rtext);
+							break;
+						case 'longtext':
+							$this->addBoxGroup(6,$varname,$rtext);
+							$this->drawLongText($response['width']);
+							break;
+						case 'number':
+							$bgtype = 4;
+						case 'currency':
+						case 'text':
+							$this->addBoxGroup($bgtype,$varname,$rtext,$response['width']);
+							$this->drawText($response['text'],$response['width']);
+							//Insert a gap here
+							$this->Rect($this->getMainPageX(),$this->GetY(),$this->getMainPageWidth(),$this->subQuestionLineSpacing,'F',array(),$this->backgroundColourQuestion);
+							$this->SetY($this->GetY() + $this->subQuestionLineSpacing,false);
+							break;
+						case 'vas':
+							$this->addBoxGroup(1,$varname,$rtext,strlen($this->vasIncrements));
+							$this->drawVas("",$response['labelleft'],$response['labelright']);
+							break;
+
+					}
 				}
 			}
-		}}
+		}
 
 		//If there is some help text for after the question
 		if (isset($question['helptextafter']))
@@ -2336,17 +2340,17 @@ class quexmlpdf extends pdf {
 		//Add this page to the layout system
 		$b = $this->cornerBorder + ($this->cornerWidth / 2.0); //temp calc for middle of line
 		$this->layout[$barcodeValue] = array(	'id' => $barcodeValue,
-							'tlx' => $this->mm2px($b),
-							'tly' => $this->mm2px($b),
-							'trx' => $this->mm2px($width - $b),
-							'try' => $this->mm2px($b),
-							'brx' => $this->mm2px($width - $b),
-							'bry' => $this->mm2px($height - $b),
-							'blx' => $this->mm2px($b),
-							'bly' => $this->mm2px($height - $b),
-							'rotation' => 0,
-							'boxgroup' => array()
-							);
+			'tlx' => $this->mm2px($b),
+			'tly' => $this->mm2px($b),
+			'trx' => $this->mm2px($width - $b),
+			'try' => $this->mm2px($b),
+			'brx' => $this->mm2px($width - $b),
+			'bry' => $this->mm2px($height - $b),
+			'blx' => $this->mm2px($b),
+			'bly' => $this->mm2px($height - $b),
+			'rotation' => 0,
+			'boxgroup' => array()
+		);
 		$this->layoutCP = $barcodeValue;
 
 		$this->SetXY($cb + $this->cornerWidth, $cb + $this->cornerWidth);

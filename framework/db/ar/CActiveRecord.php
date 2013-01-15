@@ -1277,7 +1277,7 @@ abstract class CActiveRecord extends CModel
 	 */
 	protected function query($criteria,$all=false)
 	{
-        $this->beforeFind();
+		$this->beforeFind();
 		$this->applyScopes($criteria);
 		if(empty($criteria->with))
 		{
@@ -1897,7 +1897,7 @@ class CBaseActiveRelation extends CComponent
 	/**
 	 * @var string GROUP BY clause. For {@link CActiveRelation} descendant classes, column names
 	 * referenced in this property should be disambiguated with prefix 'relationName.'.
-	 */
+	*/
 	public $group='';
 	/**
 	 * @var string how to join with other tables. This refers to the JOIN clause in an SQL statement.
@@ -2070,7 +2070,7 @@ class CActiveRelation extends CBaseActiveRelation
 	 * with the primary table, no matter the primary table is limited or not.
 	 * If this property is not set, the corresponding table will be joined with the primary table
 	 * only when the primary table is not limited.
-	 */
+	*/
 	public $together;
 	/**
 	 * @var mixed scopes to apply
@@ -2081,7 +2081,7 @@ class CActiveRelation extends CBaseActiveRelation
 	 * </ul>
 	 * @since 1.1.9
 	 */
-	 public $scopes;
+	public $scopes;
 
 	/**
 	 * Merges this relation with a criteria specified dynamically.
@@ -2246,7 +2246,7 @@ class CActiveRecordMetaData
 	public $relations=array();
 	/**
 	 * @var array attribute default values
-	 */
+	*/
 	public $attributeDefaults=array();
 
 	private $_model;
@@ -2301,7 +2301,7 @@ class CActiveRecordMetaData
 	 * @throws CDbException
 	 * @param string $name $name Name of the relation.
 	 * @param array $config $config Relation parameters.
-     * @return void
+	 * @return void
 	 * @since 1.1.2
 	 */
 	public function addRelation($name,$config)

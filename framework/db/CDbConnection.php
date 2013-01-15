@@ -139,7 +139,7 @@ class CDbConnection extends CApplicationComponent
 	 * @var string the ID of the cache application component that is used to cache the table metadata.
 	 * Defaults to 'cache' which refers to the primary cache application component.
 	 * Set this property to false if you want to disable caching table metadata.
-	 */
+	*/
 	public $schemaCacheID='cache';
 	/**
 	 * @var integer number of seconds that query results can remain valid in cache.
@@ -248,7 +248,7 @@ class CDbConnection extends CApplicationComponent
 	/**
 	 * @var string Custom PDO wrapper class.
 	 * @since 1.1.8
-	 */
+	*/
 	public $pdoClass = 'PDO';
 
 	private $_attributes=array();
@@ -421,7 +421,7 @@ class CDbConnection extends CApplicationComponent
 				$pdoClass='CMssqlSqlsrvPdoAdapter';
 		}
 		return new $pdoClass($this->connectionString,$this->username,
-									$this->password,$this->_attributes);
+			$this->password,$this->_attributes);
 	}
 
 	/**

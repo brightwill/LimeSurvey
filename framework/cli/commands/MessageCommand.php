@@ -92,7 +92,7 @@ EOD;
 
 		if(!isset($removeOld))
 			$removeOld = false;
-		
+
 		$options=array();
 		if(isset($fileTypes))
 			$options['fileTypes']=$fileTypes;

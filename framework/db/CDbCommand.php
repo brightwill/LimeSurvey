@@ -95,9 +95,9 @@ class CDbCommand extends CComponent
 	 * about valid property values. This feature has been available since version 1.1.6.
 	 *
 	 * Since 1.1.7 it is possible to use a specific mode of data fetching by setting
- 	 * {@link setFetchMode FetchMode}. See {@link http://www.php.net/manual/en/function.PDOStatement-setFetchMode.php}
- 	 * for more details.
-	 */
+	 * {@link setFetchMode FetchMode}. See {@link http://www.php.net/manual/en/function.PDOStatement-setFetchMode.php}
+	 * for more details.
+	*/
 	public function __construct(CDbConnection $connection,$query=null)
 	{
 		$this->_connection=$connection;
@@ -214,7 +214,7 @@ class CDbCommand extends CComponent
 			catch(Exception $e)
 			{
 				Yii::log('Error in preparing SQL: '.$this->getText(),CLogger::LEVEL_ERROR,'system.db.CDbCommand');
-                $errorInfo = $e instanceof PDOException ? $e->errorInfo : null;
+				$errorInfo = $e instanceof PDOException ? $e->errorInfo : null;
 				throw new CDbException(Yii::t('yii','CDbCommand failed to prepare the SQL statement: {error}',
 					array('{error}'=>$e->getMessage())),(int)$e->getCode(),$errorInfo);
 			}
@@ -345,12 +345,12 @@ class CDbCommand extends CComponent
 		{
 			if($this->_connection->enableProfiling)
 				Yii::endProfile('system.db.CDbCommand.execute('.$this->getText().')','system.db.CDbCommand.execute');
-            $errorInfo = $e instanceof PDOException ? $e->errorInfo : null;
-            $message = $e->getMessage();
+			$errorInfo = $e instanceof PDOException ? $e->errorInfo : null;
+			$message = $e->getMessage();
 			Yii::log(Yii::t('yii','CDbCommand::execute() failed: {error}. The SQL statement executed was: {sql}.',
-				array('{error}'=>$message, '{sql}'=>$this->getText().$par)),CLogger::LEVEL_ERROR,'system.db.CDbCommand');
-            if(YII_DEBUG)
-            	$message .= '. The SQL statement executed was: '.$this->getText().$par;
+			array('{error}'=>$message, '{sql}'=>$this->getText().$par)),CLogger::LEVEL_ERROR,'system.db.CDbCommand');
+			if(YII_DEBUG)
+				$message .= '. The SQL statement executed was: '.$this->getText().$par;
 			throw new CDbException(Yii::t('yii','CDbCommand failed to execute the SQL statement: {error}',
 				array('{error}'=>$message)),(int)$e->getCode(),$errorInfo);
 		}
@@ -473,9 +473,9 @@ class CDbCommand extends CComponent
 		Yii::trace('Querying SQL: '.$this->getText().$par,'system.db.CDbCommand');
 
 		if($this->_connection->queryCachingCount>0 && $method!==''
-				&& $this->_connection->queryCachingDuration>0
-				&& $this->_connection->queryCacheID!==false
-				&& ($cache=Yii::app()->getComponent($this->_connection->queryCacheID))!==null)
+			&& $this->_connection->queryCachingDuration>0
+			&& $this->_connection->queryCacheID!==false
+			&& ($cache=Yii::app()->getComponent($this->_connection->queryCacheID))!==null)
 		{
 			$this->_connection->queryCachingCount--;
 			$cacheKey='yii:dbquery'.$this->_connection->connectionString.':'.$this->_connection->username;
@@ -519,12 +519,12 @@ class CDbCommand extends CComponent
 		{
 			if($this->_connection->enableProfiling)
 				Yii::endProfile('system.db.CDbCommand.query('.$this->getText().$par.')','system.db.CDbCommand.query');
-            $errorInfo = $e instanceof PDOException ? $e->errorInfo : null;
-            $message = $e->getMessage();
+			$errorInfo = $e instanceof PDOException ? $e->errorInfo : null;
+			$message = $e->getMessage();
 			Yii::log(Yii::t('yii','CDbCommand::{method}() failed: {error}. The SQL statement executed was: {sql}.',
-				array('{method}'=>$method, '{error}'=>$message, '{sql}'=>$this->getText().$par)),CLogger::LEVEL_ERROR,'system.db.CDbCommand');
-            if(YII_DEBUG)
-            	$message .= '. The SQL statement executed was: '.$this->getText().$par;
+			array('{method}'=>$method, '{error}'=>$message, '{sql}'=>$this->getText().$par)),CLogger::LEVEL_ERROR,'system.db.CDbCommand');
+			if(YII_DEBUG)
+				$message .= '. The SQL statement executed was: '.$this->getText().$par;
 			throw new CDbException(Yii::t('yii','CDbCommand failed to execute the SQL statement: {error}',
 				array('{error}'=>$message)),(int)$e->getCode(),$errorInfo);
 		}
@@ -1173,7 +1173,7 @@ class CDbCommand extends CComponent
 			}
 		}
 		$sql='INSERT INTO ' . $this->_connection->quoteTableName($table)
-			. ' (' . implode(', ',$names) . ') VALUES ('
+		. ' (' . implode(', ',$names) . ') VALUES ('
 			. implode(', ', $placeholders) . ')';
 		return $this->setText($sql)->execute($params);
 	}

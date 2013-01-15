@@ -20,15 +20,15 @@ register_shutdown_function('simpletest_autorun');
 
 /**
  *    Exit handler to run all recent test cases and exit system if in CLI
- */
+*/
 function simpletest_autorun() {
-    if (tests_have_run()) {
-        return;
-    }
-    $result = run_local_tests();
-    if (SimpleReporter::inCli()) {
-        exit($result ? 0 : 1);
-    }
+	if (tests_have_run()) {
+		return;
+	}
+	$result = run_local_tests();
+	if (SimpleReporter::inCli()) {
+		exit($result ? 0 : 1);
+	}
 }
 
 /**
@@ -40,20 +40,20 @@ function simpletest_autorun() {
  *                         already running
  */
 function run_local_tests() {
-    try {
-        if (tests_have_run()) {
-            return;
-        }
-        $candidates = capture_new_classes();
-        $loader = new SimpleFileLoader();
-        $suite = $loader->createSuiteFromClasses(
-                basename(initial_file()),
-                $loader->selectRunnableTests($candidates));
-        return $suite->run(new DefaultReporter());
-    } catch (Exception $stack_frame_fix) {
-        print $stack_frame_fix->getMessage();
-        return false;
-    }
+	try {
+		if (tests_have_run()) {
+			return;
+		}
+		$candidates = capture_new_classes();
+		$loader = new SimpleFileLoader();
+		$suite = $loader->createSuiteFromClasses(
+			basename(initial_file()),
+			$loader->selectRunnableTests($candidates));
+		return $suite->run(new DefaultReporter());
+	} catch (Exception $stack_frame_fix) {
+		print $stack_frame_fix->getMessage();
+		return false;
+	}
 }
 
 /**
@@ -62,10 +62,10 @@ function run_local_tests() {
  *    @return boolean        True if tests have run.
  */
 function tests_have_run() {
-    if ($context = SimpleTest::getContext()) {
-        return (boolean)$context->getTest();
-    }
-    return false;
+	if ($context = SimpleTest::getContext()) {
+		return (boolean)$context->getTest();
+	}
+	return false;
 }
 
 /**
@@ -73,16 +73,16 @@ function tests_have_run() {
  *    @return string        Filename of first autorun script.
  */
 function initial_file() {
-    static $file = false;
-    if (! $file) {
-        if (isset($_SERVER, $_SERVER['SCRIPT_FILENAME'])) {
-            $file = $_SERVER['SCRIPT_FILENAME'];
-        } else {
-            $included_files = get_included_files();
-            $file = reset($included_files);
-        }
-    }
-    return $file;
+	static $file = false;
+	if (! $file) {
+		if (isset($_SERVER, $_SERVER['SCRIPT_FILENAME'])) {
+			$file = $_SERVER['SCRIPT_FILENAME'];
+		} else {
+			$included_files = get_included_files();
+			$file = reset($included_files);
+		}
+	}
+	return $file;
 }
 
 /**
@@ -91,9 +91,9 @@ function initial_file() {
  *    @return array        Class names.
  */
 function capture_new_classes() {
-    global $SIMPLETEST_AUTORUNNER_INITIAL_CLASSES;
-    return array_map('strtolower', array_diff(get_declared_classes(),
-                            $SIMPLETEST_AUTORUNNER_INITIAL_CLASSES ?
-                            $SIMPLETEST_AUTORUNNER_INITIAL_CLASSES : array()));
+	global $SIMPLETEST_AUTORUNNER_INITIAL_CLASSES;
+	return array_map('strtolower', array_diff(get_declared_classes(),
+		$SIMPLETEST_AUTORUNNER_INITIAL_CLASSES ?
+		$SIMPLETEST_AUTORUNNER_INITIAL_CLASSES : array()));
 }
 ?>

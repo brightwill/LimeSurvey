@@ -46,7 +46,7 @@ abstract class CModule extends CComponent
 	 * @var array the behaviors that should be attached to the module.
 	 * The behaviors will be attached to the module when {@link init} is called.
 	 * Please refer to {@link CModel::behaviors} on how to specify the value of this property.
-	 */
+	*/
 	public $behaviors=array();
 
 	private $_id;
@@ -66,7 +66,7 @@ abstract class CModule extends CComponent
 	 * @param CModule $parent the parent module (if any)
 	 * @param mixed $config the module configuration. It can be either an array or
 	 * the path of a PHP file returning the configuration array.
-	 */
+	*/
 	public function __construct($id,$parent,$config=null)
 	{
 		$this->_id=$id;

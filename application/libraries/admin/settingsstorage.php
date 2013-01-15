@@ -1,77 +1,77 @@
 <?php
 /*
  * LimeSurvey
- * Copyright (C) 2007-2011 The LimeSurvey Project Team / Carsten Schmitz
- * All rights reserved.
- * License: GNU/GPL License v2 or later, see LICENSE.php
- * LimeSurvey is free software. This version may have been modified pursuant
- * to the GNU General Public License, and as distributed it includes or
- * is derivative of works licensed under the GNU General Public License or
- * other free or open source software licenses.
- * See COPYRIGHT.php for copyright notices and details.
- *
- *	$Id$
- */
+* Copyright (C) 2007-2011 The LimeSurvey Project Team / Carsten Schmitz
+* All rights reserved.
+* License: GNU/GPL License v2 or later, see LICENSE.php
+* LimeSurvey is free software. This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*
+*	$Id$
+*/
 final class SettingsStorage extends ArrayObject
 {
-    protected static $_instance = null;
+	protected static $_instance = null;
 
-    public function __construct($params = array())
-    {
-    	$defaults = array('array' => array(), 'flags' => parent::ARRAY_AS_PROPS);
+	public function __construct($params = array())
+	{
+		$defaults = array('array' => array(), 'flags' => parent::ARRAY_AS_PROPS);
 
-        foreach ($defaults as $key => $val)
-        {
-            if (isset($params[$key]) && $params[$key] !== "")
-            {
+		foreach ($defaults as $key => $val)
+		{
+			if (isset($params[$key]) && $params[$key] !== "")
+			{
 				$defaults[$key] = $params[$key];
-            }
-        }
-        extract($defaults);
-		
-        parent::__construct($array, $flags);
-    }
+			}
+		}
+		extract($defaults);
 
-    public static function getInstance()
-    {
-        if( self::$_instance === NULL ) {
-            self::$_instance = new self();
-        }
-        return self::$_instance;
-    }
+		parent::__construct($array, $flags);
+	}
 
-    public static function get($index)
-    {
-        $instance = self::getInstance();
+	public static function getInstance()
+	{
+		if( self::$_instance === NULL ) {
+			self::$_instance = new self();
+		}
+		return self::$_instance;
+	}
 
-        if (!$instance->offsetExists($index)) {
-            throw new Exception("No entry is registered for key '$index'");
-        }
+	public static function get($index)
+	{
+		$instance = self::getInstance();
 
-        return $instance->offsetGet($index);
-    }
+		if (!$instance->offsetExists($index)) {
+			throw new Exception("No entry is registered for key '$index'");
+		}
 
-    public static function set($index, $value)
-    {
-        $instance = self::getInstance();
-        $instance->offsetSet($index, $value);
-    }
+		return $instance->offsetGet($index);
+	}
 
-    public static function isRegistered($index)
-    {
-        if (self::$_instance === null) {
-            return false;
-        }
-        return self::$_instance->offsetExists($index);
-    }
+	public static function set($index, $value)
+	{
+		$instance = self::getInstance();
+		$instance->offsetSet($index, $value);
+	}
 
-    /**
-     * Workaround for http://bugs.php.net/bug.php?id=40442 (ZF-960).
-     */
-    public function offsetExists($index)
-    {
-        return array_key_exists($index, $this);
-    }
+	public static function isRegistered($index)
+	{
+		if (self::$_instance === null) {
+			return false;
+		}
+		return self::$_instance->offsetExists($index);
+	}
+
+	/**
+	 * Workaround for http://bugs.php.net/bug.php?id=40442 (ZF-960).
+	 */
+	public function offsetExists($index)
+	{
+		return array_key_exists($index, $this);
+	}
 
 
 }

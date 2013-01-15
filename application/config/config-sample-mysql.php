@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /*
-| -------------------------------------------------------------------
+ | -------------------------------------------------------------------
 | DATABASE CONNECTIVITY SETTINGS
 | -------------------------------------------------------------------
 | This file will contain the settings needed to access your database.
@@ -27,12 +27,12 @@ return array(
 	'name' => 'LimeSurvey',
 	'defaultController' => 'survey',
 
-    'import' => array(
-        'application.core.*',
-        'application.models.*',
-        'application.controllers.*',
-        'application.modules.*',
-    ),
+	'import' => array(
+		'application.core.*',
+		'application.models.*',
+		'application.controllers.*',
+		'application.modules.*',
+	),
 
 	'components' => array(
 		'db' => array(
@@ -43,28 +43,28 @@ return array(
 			'charset' => 'utf8',
 			'tablePrefix' => 'lime_',
 		),
-/*
-		'session' => array (
-			'class' => 'system.web.CDbHttpSession',
-			'connectionID' => 'db',
-			'sessionTableName' => '{{sessions}}',
+		/*
+		 'session' => array (
+		 	'class' => 'system.web.CDbHttpSession',
+		 	'connectionID' => 'db',
+		 	'sessionTableName' => '{{sessions}}',
+		 ),
+*/
+		'urlManager' => array(
+			'urlFormat' => 'get',
+			'rules' => require('routes.php'),
+			'showScriptName' => true,
 		),
-        */
-        'urlManager' => array(
-            'urlFormat' => 'get',
-            'rules' => require('routes.php'),
-            'showScriptName' => true,
-        ),
-        // Use the following config variable to set modified optional settings copied from config-defaults.php
-        'config'=>array(
-            // debug: Set this to 1 if you are looking for errors. If you still get no errors after enabling this
-            // then please check your error-logs - either in your hosting provider admin panel or in some /logs directory
-            // on your webspace.
-            // LimeSurvey developers: Set this to 2 to additionally display STRICT PHP error messages and get full access to standard templates
-            'debug'=>0,
-            'debugsql'=>0 // Set this to 1 to enanble sql logging, only active when debug = 2
-        )
-    )
+		// Use the following config variable to set modified optional settings copied from config-defaults.php
+		'config'=>array(
+			// debug: Set this to 1 if you are looking for errors. If you still get no errors after enabling this
+			// then please check your error-logs - either in your hosting provider admin panel or in some /logs directory
+			// on your webspace.
+			// LimeSurvey developers: Set this to 2 to additionally display STRICT PHP error messages and get full access to standard templates
+			'debug'=>0,
+			'debugsql'=>0 // Set this to 1 to enanble sql logging, only active when debug = 2
+		)
+	)
 );
 /* End of file config.php */
 /* Location: ./application/config/config.php */

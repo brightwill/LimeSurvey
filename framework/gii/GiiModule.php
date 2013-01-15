@@ -68,7 +68,7 @@ Yii::import('system.gii.CCodeForm');
  * @version $Id: GiiModule.php 3426 2011-10-25 00:01:09Z alexander.makarow $
  * @package system.gii
  * @since 1.1.2
- */
+*/
 class GiiModule extends CWebModule
 {
 	/**
@@ -92,13 +92,13 @@ class GiiModule extends CWebModule
 	 * The directory referred by a single path alias may contain multiple code generators, each stored
 	 * under a sub-directory whose name is the generator name.
 	 * Defaults to array('application.gii').
-	 */
+	*/
 	public $generatorPaths=array('application.gii');
 	/**
 	 * @var integer the permission to be set for newly generated code files.
 	 * This value will be used by PHP chmod function.
 	 * Defaults to 0666, meaning the file is read-writable by all users.
-	 */
+	*/
 	public $newFileMode=0666;
 	/**
 	 * @var integer the permission to be set for newly generated directories.
@@ -116,15 +116,15 @@ class GiiModule extends CWebModule
 	{
 		parent::init();
 		Yii::app()->setComponents(array(
-			'errorHandler'=>array(
-				'class'=>'CErrorHandler',
-				'errorAction'=>$this->getId().'/default/error',
-			),
-			'user'=>array(
-				'class'=>'CWebUser',
-				'stateKeyPrefix'=>'gii',
-				'loginUrl'=>Yii::app()->createUrl($this->getId().'/default/login'),
-			),
+		'errorHandler'=>array(
+		'class'=>'CErrorHandler',
+		'errorAction'=>$this->getId().'/default/error',
+		),
+		'user'=>array(
+		'class'=>'CWebUser',
+		'stateKeyPrefix'=>'gii',
+		'loginUrl'=>Yii::app()->createUrl($this->getId().'/default/login'),
+		),
 		), false);
 		$this->generatorPaths[]='gii.generators';
 		$this->controllerMap=$this->findGenerators();

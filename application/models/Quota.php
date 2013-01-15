@@ -1,17 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
-   * LimeSurvey
-   * Copyright (C) 2007 The LimeSurvey Project Team / Carsten Schmitz
-   * All rights reserved.
-   * License: GNU/GPL License v2 or later, see LICENSE.php
-   * LimeSurvey is free software. This version may have been modified pursuant
-   * to the GNU General Public License, and as distributed it includes or
-   * is derivative of works licensed under the GNU General Public License or
-   * other free or open source software licenses.
-   * See COPYRIGHT.php for copyright notices and details.
-   *
-   *	$Id$
-   *	Files Purpose: lots of common functions
+ * LimeSurvey
+* Copyright (C) 2007 The LimeSurvey Project Team / Carsten Schmitz
+* All rights reserved.
+* License: GNU/GPL License v2 or later, see LICENSE.php
+* LimeSurvey is free software. This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*
+*	$Id$
+*	Files Purpose: lots of common functions
 */
 
 class Quota extends CActiveRecord
@@ -21,7 +21,7 @@ class Quota extends CActiveRecord
 	 *
 	 * @static
 	 * @access public
-     * @param string $class
+	 * @param string $class
 	 * @return CActiveRecord
 	 */
 	public static function model($class = __CLASS__)
@@ -66,26 +66,26 @@ class Quota extends CActiveRecord
 	}
 
 	function insertRecords($data)
-    {
-        $quota = new self;
+	{
+		$quota = new self;
 		foreach ($data as $k => $v)
 			$quota->$k = $v;
 		return $quota->save();
-    }
+	}
 
-    function deleteQuota($condition = false, $recursive = true)
-    {
-        if ($recursive == true)
-        {
-            $oResult = Quota::model()->findAllByAttributes($condition);
-            foreach ($oResult as $aRow)
-            {
-                Quota_languagesettings::model()->deleteAllByAttributes(array('quotals_quota_id' => $aRow['id']));
-                Quota_members::model()->deleteAllByAttributes(array('quota_id' => $aRow['id']));
-            }
-        }
+	function deleteQuota($condition = false, $recursive = true)
+	{
+		if ($recursive == true)
+		{
+			$oResult = Quota::model()->findAllByAttributes($condition);
+			foreach ($oResult as $aRow)
+			{
+				Quota_languagesettings::model()->deleteAllByAttributes(array('quotals_quota_id' => $aRow['id']));
+				Quota_members::model()->deleteAllByAttributes(array('quota_id' => $aRow['id']));
+			}
+		}
 
-        Quota::model()->deleteAllByAttributes($condition);
-    }
+		Quota::model()->deleteAllByAttributes($condition);
+	}
 }
 ?>

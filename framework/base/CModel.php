@@ -81,7 +81,7 @@ abstract class CModel extends CComponent implements IteratorAggregate, ArrayAcce
 	 *
 	 * @return array validation rules to be applied when {@link validate()} is called.
 	 * @see scenario
-	 */
+	*/
 	public function rules()
 	{
 		return array();

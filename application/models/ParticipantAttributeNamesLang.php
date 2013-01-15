@@ -1,17 +1,17 @@
 <?php
 /*
  * LimeSurvey
- * Copyright (C) 2007-2011 The LimeSurvey Project Team / Carsten Schmitz
- * All rights reserved.
- * License: GNU/GPL License v2 or later, see LICENSE.php
- * LimeSurvey is free software. This version may have been modified pursuant
- * to the GNU General Public License, and as distributed it includes or
- * is derivative of works licensed under the GNU General Public License or
- * other free or open source software licenses.
- * See COPYRIGHT.php for copyright notices and details.
- *
- *	$Id$
- */
+* Copyright (C) 2007-2011 The LimeSurvey Project Team / Carsten Schmitz
+* All rights reserved.
+* License: GNU/GPL License v2 or later, see LICENSE.php
+* LimeSurvey is free software. This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*
+*	$Id$
+*/
 /**
  * This is the model class for table "{{{{participant_attribute_names}}}}".
  *
@@ -27,20 +27,20 @@ class ParticipantAttributeNamesLang extends CActiveRecord
 	 *
 	 * @static
 	 * @access public
-     * @param string $class
+	 * @param string $class
 	 * @return CActiveRecord
 	 */
 
-    /**
-    * Returns the primary key of this table
-    *
-    * @access public
-    * @return string
-    */
-    public function primaryKey()
-    {
-        return 'attribute_id';
-    }
+	/**
+	 * Returns the primary key of this table
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function primaryKey()
+	{
+		return 'attribute_id';
+	}
 
 	public static function model($class = __CLASS__)
 	{
@@ -77,7 +77,7 @@ class ParticipantAttributeNamesLang extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-            'participant_attribute_names'=>array(self::BELONGS_TO, 'ParticipantAttributeNames', 'attribute_id')
+			'participant_attribute_names'=>array(self::BELONGS_TO, 'ParticipantAttributeNames', 'attribute_id')
 		);
 	}
 

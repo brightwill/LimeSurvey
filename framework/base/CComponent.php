@@ -194,8 +194,8 @@ class CComponent
 		}
 		else if(is_array($this->_m))
 		{
- 			if(isset($this->_m[$name]))
- 				return true;
+			if(isset($this->_m[$name]))
+				return true;
 			foreach($this->_m as $object)
 			{
 				if($object->getEnabled() && (property_exists($object,$name) || $object->canGetProperty($name)))

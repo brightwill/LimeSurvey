@@ -1,6 +1,6 @@
 <?php
 /*
-* LimeSurvey
+ * LimeSurvey
 * Copyright (C) 2007-2011 The LimeSurvey Project Team / Carsten Schmitz
 * All rights reserved.
 * License: GNU/GPL License v2 or later, see LICENSE.php
@@ -32,24 +32,24 @@
  *
  */
 class LSHttpRequest extends CHttpRequest {
-    public $noCsrfValidationRoutes = array();
+	public $noCsrfValidationRoutes = array();
 
-    protected function normalizeRequest(){
-        parent::normalizeRequest();
-        
-        if($_SERVER['REQUEST_METHOD'] != 'POST') return;
+	protected function normalizeRequest(){
+		parent::normalizeRequest();
 
-        $route = Yii::app()->getUrlManager()->parseUrl($this);
-        if($this->enableCsrfValidation){
-            foreach($this->noCsrfValidationRoutes as $cr){
-                if(preg_match('#'.$cr.'#', $route)){
-                    Yii::app()->detachEventHandler('onBeginRequest',
-                        array($this,'validateCsrfToken'));
-                    Yii::trace('Route "'.$route.' passed without CSRF validation');
-                    break; // found first route and break
-                }
-            }
-        }
-    }
+		if($_SERVER['REQUEST_METHOD'] != 'POST') return;
+
+		$route = Yii::app()->getUrlManager()->parseUrl($this);
+		if($this->enableCsrfValidation){
+			foreach($this->noCsrfValidationRoutes as $cr){
+				if(preg_match('#'.$cr.'#', $route)){
+					Yii::app()->detachEventHandler('onBeginRequest',
+					array($this,'validateCsrfToken'));
+					Yii::trace('Route "'.$route.' passed without CSRF validation');
+					break; // found first route and break
+				}
+			}
+		}
+	}
 
 }

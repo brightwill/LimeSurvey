@@ -1,6 +1,6 @@
 <?php
 /*
-					COPYRIGHT
+ COPYRIGHT
 
 Copyright 2007 Sergio Vaccaro <sergio@inservibile.org>
 
@@ -41,7 +41,7 @@ class jsonRPCServer {
 			$_SERVER['REQUEST_METHOD'] != 'POST' ||
 			empty($_SERVER['CONTENT_TYPE']) ||
 			$_SERVER['CONTENT_TYPE'] != 'application/json'
-			) {
+		) {
 			// This is not a JSON-RPC request
 			return false;
 		}
@@ -53,23 +53,23 @@ class jsonRPCServer {
 		try {
 			if ($result = @call_user_func_array(array($object,$request['method']),$request['params'])) {
 				$response = array (
-									'id' => $request['id'],
-									'result' => $result,
-									'error' => NULL
-									);
+					'id' => $request['id'],
+					'result' => $result,
+					'error' => NULL
+				);
 			} else {
 				$response = array (
-									'id' => $request['id'],
-									'result' => NULL,
-									'error' => 'unknown method or incorrect parameters'
-									);
+					'id' => $request['id'],
+					'result' => NULL,
+					'error' => 'unknown method or incorrect parameters'
+				);
 			}
 		} catch (Exception $e) {
 			$response = array (
-								'id' => $request['id'],
-								'result' => NULL,
-								'error' => $e->getMessage()
-								);
+				'id' => $request['id'],
+				'result' => NULL,
+				'error' => $e->getMessage()
+			);
 		}
 
 		// output the response

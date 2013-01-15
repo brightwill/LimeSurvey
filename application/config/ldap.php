@@ -1,23 +1,23 @@
 <?php
 /*
  * LimeSurvey
- * Copyright (C) 2007-2011 The LimeSurvey Project Team / Carsten Schmitz
- * All rights reserved.
- * License: GNU/GPL License v2 or later, see LICENSE.php
- * LimeSurvey is free software. This version may have been modified pursuant
- * to the GNU General Public License, and as distributed it includes or
- * is derivative of works licensed under the GNU General Public License or
- * other free or open source software licenses.
- * See COPYRIGHT.php for copyright notices and details.
- *
- *	$Id$
- */
+* Copyright (C) 2007-2011 The LimeSurvey Project Team / Carsten Schmitz
+* All rights reserved.
+* License: GNU/GPL License v2 or later, see LICENSE.php
+* LimeSurvey is free software. This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*
+*	$Id$
+*/
 
 /*********** LDAP Parameters and Functions ***********************
  *
- *  - First define your ldap servers and remember the serverId
- *  - Then define your ldap_query and 'attach' it to the serverId
- ******************************************************************/
+*  - First define your ldap servers and remember the serverId
+*  - Then define your ldap_query and 'attach' it to the serverId
+******************************************************************/
 
 /*********************************************/
 /* LDAP servers                              */
@@ -68,14 +68,14 @@ $ldap_server[$serverId]['bindpw']	=	"AsecretPassword";
 
 /********* Copy for more definitions *****
  $serverId++;
- $ldap_server[$serverId]['server'] = "ldap.mycompany.org";
- $ldap_server[$serverId]['port'] = "389";
- $ldap_server[$serverId]['protoversion'] = "ldapv3";
- $ldap_server[$serverId]['encrypt'] = "start-tls";
- $ldap_server[$serverId]['referrals'] = false;
- $ldap_server[$serverId]['binddn']	=	"uid=mybinduser,dc=mycompany,dc=org";
- $ldap_server[$serverId]['bindpw']	=	"AsecretPassword";
- *****************************************/
+$ldap_server[$serverId]['server'] = "ldap.mycompany.org";
+$ldap_server[$serverId]['port'] = "389";
+$ldap_server[$serverId]['protoversion'] = "ldapv3";
+$ldap_server[$serverId]['encrypt'] = "start-tls";
+$ldap_server[$serverId]['referrals'] = false;
+$ldap_server[$serverId]['binddn']	=	"uid=mybinduser,dc=mycompany,dc=org";
+$ldap_server[$serverId]['bindpw']	=	"AsecretPassword";
+*****************************************/
 
 /**********************************************************************/
 /* Predefined Queries for Token Imports                               */
@@ -204,8 +204,8 @@ $ldap_queries[$query_id]['attr2'] = '';
 
 /********
  $query_id++;
- //Copy previous definition lines
- ********/
+//Copy previous definition lines
+********/
 
 
 //DO NOT CHANGE BELOW HERE --------------------

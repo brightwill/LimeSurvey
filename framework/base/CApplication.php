@@ -117,7 +117,7 @@ abstract class CApplication extends CModule
 	 * Please make sure you specify the {@link getBasePath basePath} property in the configuration,
 	 * which should point to the directory containing all application logic, template and data.
 	 * If not, the directory will be defaulted to 'protected'.
-	 */
+	*/
 	public function __construct($config=null)
 	{
 		Yii::setApplication($this);

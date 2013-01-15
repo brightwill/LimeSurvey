@@ -1,17 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * LimeSurvey
- * Copyright (C) 2007-2011 The LimeSurvey Project Team / Carsten Schmitz
- * All rights reserved.
- * License: GNU/GPL License v2 or later, see LICENSE.php
- * LimeSurvey is free software. This version may have been modified pursuant
- * to the GNU General Public License, and as distributed it includes or
- * is derivative of works licensed under the GNU General Public License or
- * other free or open source software licenses.
- * See COPYRIGHT.php for copyright notices and details.
- *
- *	$Id$
- */
+* Copyright (C) 2007-2011 The LimeSurvey Project Team / Carsten Schmitz
+* All rights reserved.
+* License: GNU/GPL License v2 or later, see LICENSE.php
+* LimeSurvey is free software. This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*
+*	$Id$
+*/
 
 abstract class LSYii_Controller extends CController
 {
@@ -28,7 +28,7 @@ abstract class LSYii_Controller extends CController
 		parent::__construct($id, $module);
 		$this->_checkInstallation();
 
-        Yii::app()->session->init();
+		Yii::app()->session->init();
 		$this->loadLibrary('LS.LS');
 		$this->loadHelper('globalsettings');
 		$this->loadHelper('common');
@@ -48,9 +48,9 @@ abstract class LSYii_Controller extends CController
 	{
 		$file_name = Yii::app()->getConfig('rootdir').'/application/config/config.php';
 		if (!file_exists($file_name))
-        {
+		{
 			$this->redirect($this->createUrl('/installer'));
-        }
+		}
 	}
 
 	/**
@@ -93,8 +93,8 @@ abstract class LSYii_Controller extends CController
 		if ($dieoutput != '')
 			throw new CException($dieoutput);
 
-   		if (ini_get("max_execution_time") < 1200) @set_time_limit(1200); // Maximum execution time - works only if safe_mode is off
-        if ((int)substr(ini_get("memory_limit"),0,-1) < (int) Yii::app()->getConfig('memory_limit')) @ini_set("memory_limit",Yii::app()->getConfig('memory_limit').'M'); // Set Memory Limit for big surveys
+		if (ini_get("max_execution_time") < 1200) @set_time_limit(1200); // Maximum execution time - works only if safe_mode is off
+		if ((int)substr(ini_get("memory_limit"),0,-1) < (int) Yii::app()->getConfig('memory_limit')) @ini_set("memory_limit",Yii::app()->getConfig('memory_limit').'M'); // Set Memory Limit for big surveys
 
 		// The following function (when called) includes FireBug Lite if true
 		defined('FIREBUG') or define('FIREBUG' , Yii::app()->getConfig('use_firebug_lite'));
@@ -115,22 +115,24 @@ abstract class LSYii_Controller extends CController
 
 		enforceSSLMode();// This really should be at the top but for it to utilise getGlobalSetting() it has to be here
 
-        if (Yii::app()->getConfig('debug')==1) {//For debug purposes - switch on in config.php
-            @ini_set("display_errors", 1);
-            error_reporting(E_ALL);
-        }
-        elseif (Yii::app()->getConfig('debug')==2) {//For debug purposes - switch on in config.php
-            @ini_set("display_errors", 1);
-            error_reporting(E_ALL | E_STRICT);
-        }
-        else {
-            @ini_set("display_errors", 0);
-            error_reporting(0);
-        }
-        
+		if (Yii::app()->getConfig('debug')==1) {//For debug purposes - switch on in config.php
+			@ini_set("display_errors", 1);
+			error_reporting(E_ALL);
+		}
+		elseif (Yii::app()->getConfig('debug')==2) {//For debug purposes - switch on in config.php
+			@ini_set("display_errors", 1);
+			error_reporting(E_ALL | E_STRICT);
+		}
+		else {
+			@ini_set("display_errors", 0);
+			error_reporting(0);
+		}
+
 		//SET LOCAL TIME
 		$timeadjust = Yii::app()->getConfig("timeadjust");
-		if (substr($timeadjust,0,1)!='-' && substr($timeadjust,0,1)!='+') {$timeadjust='+'.$timeadjust;}
+		if (substr($timeadjust,0,1)!='-' && substr($timeadjust,0,1)!='+') {
+			$timeadjust='+'.$timeadjust;
+		}
 		if (strpos($timeadjust,'hours')===false && strpos($timeadjust,'minutes')===false && strpos($timeadjust,'days')===false)
 		{
 			Yii::app()->setConfig("timeadjust",$timeadjust.' hours');

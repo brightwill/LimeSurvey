@@ -40,7 +40,7 @@ class CCodeGenerator extends CController
 	 * @var string the code model class. This can be either a class name (if it can be autoloaded)
 	 * or a path alias referring to the class file.
 	 * Child classes must configure this property with a concrete value.
-	 */
+	*/
 	public $codeModel;
 
 	private $_viewPath;

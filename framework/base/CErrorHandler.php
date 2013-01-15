@@ -53,7 +53,7 @@ Yii::import('CHtml',true);
  * @version $Id: CErrorHandler.php 3540 2012-01-16 10:17:01Z mdomba $
  * @package system.base
  * @since 1.0
- */
+*/
 class CErrorHandler extends CApplicationComponent
 {
 	/**
@@ -336,9 +336,9 @@ class CErrorHandler extends CApplicationComponent
 		{
 			if($viewPath!==null)
 			{
-				 $viewFile=$this->getViewFileInternal($viewPath,$view,$code,$i===2?'en_us':null);
-				 if(is_file($viewFile))
-				 	 return $viewFile;
+				$viewFile=$this->getViewFileInternal($viewPath,$view,$code,$i===2?'en_us':null);
+				if(is_file($viewFile))
+					return $viewFile;
 			}
 		}
 	}

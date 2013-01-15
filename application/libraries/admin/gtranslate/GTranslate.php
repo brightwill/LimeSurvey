@@ -1,47 +1,47 @@
 <?php
 
 /**
-* GTranslate - A class to comunicate with Google Translate(TM) Service
-*               Google Translate(TM) API Wrapper
-*               More info about Google(TM) service can be found on http://code.google.com/apis/ajaxlanguage/documentation/reference.html
-* 		This code has o affiliation with Google (TM) , its a PHP Library that allows to comunicate with public a API
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*
-* @author Jose da Silva <jose@josedasilva.net>
-* @since 2009/11/18
-* @version 0.7.4
-* @licence LGPL v3
-*
-* <code>
-* <?
-* require_once("GTranslate.php");
-* try{
-*	$gt = new Gtranslate;
-*	echo $gt->english_to_german("hello world");
-* } catch (GTranslateException $ge)
-* {
-*	echo $ge->getMessage();
-* }
-* ?>
-* </code>
-*/
+ * GTranslate - A class to comunicate with Google Translate(TM) Service
+ *               Google Translate(TM) API Wrapper
+ *               More info about Google(TM) service can be found on http://code.google.com/apis/ajaxlanguage/documentation/reference.html
+ * 		This code has o affiliation with Google (TM) , its a PHP Library that allows to comunicate with public a API
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @author Jose da Silva <jose@josedasilva.net>
+ * @since 2009/11/18
+ * @version 0.7.4
+ * @licence LGPL v3
+ *
+ * <code>
+ * <?
+ * require_once("GTranslate.php");
+ * try{
+ *	$gt = new Gtranslate;
+ *	echo $gt->english_to_german("hello world");
+ * } catch (GTranslateException $ge)
+ * {
+ *	echo $ge->getMessage();
+ * }
+ * ?>
+ * </code>
+ */
 
 
 /**
-* Exception class for GTranslated Exceptions
-*/
+ * Exception class for GTranslated Exceptions
+ */
 
 class GTranslateException extends Exception
 {
@@ -57,87 +57,87 @@ class GTranslateException extends Exception
 class GTranslate
 {
 	/**
-	* Google Translate(TM) Api endpoint
-	* @access private
-	* @var String
-	*/
+	 * Google Translate(TM) Api endpoint
+	 * @access private
+	 * @var String
+	 */
 	private $url = "https://www.googleapis.com/language/translate/v2";
 
-        /**
-        * Google Translate (TM) Api Version
-        * @access private
-        * @var String
-        */
+	/**
+	 * Google Translate (TM) Api Version
+	 * @access private
+	 * @var String
+	 */
 	private $api_version = "2";
 
-        /**
-        * Comunication Transport Method
- 	* Available: http / curl
-        * @access private
-        * @var String
-        */
+	/**
+	 * Comunication Transport Method
+	 * Available: http / curl
+	 * @access private
+	 * @var String
+	 */
 	private $request_type = "http";
 
-        /**
-        * Path to available languages file
-        * @access private
-        * @var String
-        */
+	/**
+	 * Path to available languages file
+	 * @access private
+	 * @var String
+	 */
 	private $available_languages_file 	= "languages.ini";
 
-        /**
-        * Holder to the parse of the ini file
-        * @access private
-        * @var Array
-        */
+	/**
+	 * Holder to the parse of the ini file
+	 * @access private
+	 * @var Array
+	 */
 	private $available_languages = array();
 
 	/**
-	* Google Translate api key
- 	* @access private
-	* @var string
+	 * Google Translate api key
+	 * @access private
+	 * @var string
 	*/
 	private $api_key = null;
 
 	/**
-	* Google request User IP
-	* @access private
-	* @var string
-	*/
+	 * Google request User IP
+	 * @access private
+	 * @var string
+	 */
 	private $user_ip = null;
 
-        /**
-        * Constructor sets up {@link $available_languages}
-        */
+	/**
+	 * Constructor sets up {@link $available_languages}
+	 */
 	public function __construct()
 	{
 		$this->available_languages = parse_ini_file("languages.ini");
 	}
 
-        /**
-        * URL Formater to use on request
-        * @access private
-        * @param array $lang_pair
-	* @param array $string
-	* "returns String $url
-        */
+	/**
+	 * URL Formater to use on request
+	 * @access private
+	 * @param array $lang_pair
+	 * @param array $string
+	 * "returns String $url
+	 */
 
 	private function urlFormat($lang_pair,$string)
 	{
 		$parameters = array(
 			"q" => $string,
-            "source" => $lang_pair[0],
-            "target" => $lang_pair[1],
+			"source" => $lang_pair[0],
+			"target" => $lang_pair[1],
 		);
 
 		if(!empty($this->api_key))
 		{
 			$parameters["key"] = $this->api_key;
 		}
-        else
-        {
-            $parameters["key"] = getGlobalSetting('googletranslateapikey');
-        }
+		else
+		{
+			$parameters["key"] = getGlobalSetting('googletranslateapikey');
+		}
 
 		$url  = "";
 
@@ -149,54 +149,54 @@ class GTranslate
 	}
 
 	/**
-	* Define the request type
-	* @access public
-	* @param string $request_type
-	* return boolean
-	*/
+	 * Define the request type
+	 * @access public
+	 * @param string $request_type
+	 * return boolean
+	 */
 	public function setRequestType($request_type = 'http') {
-  		if (!empty($request_type)) {
-	    		$this->request_type = $request_type;
+		if (!empty($request_type)) {
+			$this->request_type = $request_type;
 			return true;
-  		}
+		}
 		return false;
 	}
 
 	/**
-	* Define the Google Translate Api Key
- 	* @access public
-	* @param string $api_key
-	* return boolean
-	*/
+	 * Define the Google Translate Api Key
+	 * @access public
+	 * @param string $api_key
+	 * return boolean
+	 */
 	public function setApiKey($api_key) {
-  		if (!empty($api_key)) {
-	    		$this->api_key = $api_key;
+		if (!empty($api_key)) {
+			$this->api_key = $api_key;
 			return true;
-  		}
+		}
 		return false;
 	}
 
 	/**
-	* Define the User Ip for the query
- 	* @access public
-	* @param string $ip
-	* return boolean
-	*/
+	 * Define the User Ip for the query
+	 * @access public
+	 * @param string $ip
+	 * return boolean
+	 */
 	public function setUserIp($ip) {
-  		if (!empty($ip)) {
-	    		$this->user_ip = $ip;
+		if (!empty($ip)) {
+			$this->user_ip = $ip;
 			return true;
-  		}
+		}
 		return false;
 	}
 
-        /**
-        * Query the Google(TM) endpoint
-        * @access private
-        * @param array $lang_pair
-        * @param array $string
-        * returns String $response
-        */
+	/**
+	 * Query the Google(TM) endpoint
+	 * @access private
+	 * @param array $lang_pair
+	 * @param array $string
+	 * returns String $response
+	 */
 
 	public function query($lang_pair,$string)
 	{
@@ -205,27 +205,27 @@ class GTranslate
 		return $response;
 	}
 
-        /**
-        * Query Wrapper for Http Transport
-        * @access private
-        * @param String $url
-        * returns String $response
-        */
+	/**
+	 * Query Wrapper for Http Transport
+	 * @access private
+	 * @param String $url
+	 * returns String $response
+	 */
 
 	private function requestHttp($url)
 	{
-        $fullurl = $this->url."?".$url;
-        $return = file_get_contents($fullurl);
-        $json = json_decode($return);
+		$fullurl = $this->url."?".$url;
+		$return = file_get_contents($fullurl);
+		$json = json_decode($return);
 		return GTranslate::evalResponse($json);
 	}
 
-        /**
-        * Query Wrapper for Curl Transport
-        * @access private
-        * @param String $url
-        * returns String $response
-        */
+	/**
+	 * Query Wrapper for Curl Transport
+	 * @access private
+	 * @param String $url
+	 * returns String $response
+	 */
 
 	private function requestCurl($url)
 	{
@@ -240,34 +240,34 @@ class GTranslate
 		return GTranslate::evalResponse(json_decode($body));
 	}
 
-        /**
-        * Response Evaluator, validates the response
-	* Throws an exception on error
-        * @access private
-        * @param String $json_response
-        * returns String $response
-        */
+	/**
+	 * Response Evaluator, validates the response
+	 * Throws an exception on error
+	 * @access private
+	 * @param String $json_response
+	 * returns String $response
+	 */
 
 	private function evalResponse($json_response)
 	{
-        if (isset($json_response->data->translations))
-        {
-            return $json_response->data->translations[0]->translatedText;
-        }
-        else
-        {
-            throw new GTranslateException("Unable to perform Translation:".$json_response->data);
+		if (isset($json_response->data->translations))
+		{
+			return $json_response->data->translations[0]->translatedText;
+		}
+		else
+		{
+			throw new GTranslateException("Unable to perform Translation:".$json_response->data);
 		}
 	}
 
 
-        /**
-        * Validates if the language pair is valid
-        * Throws an exception on error
-        * @access private
-        * @param Array $languages
-        * returns Array $response Array with formated languages pair
-        */
+	/**
+	 * Validates if the language pair is valid
+	 * Throws an exception on error
+	 * @access private
+	 * @param Array $languages
+	 * returns Array $response Array with formated languages pair
+	 */
 
 	private function isValidLanguage($languages)
 	{
@@ -296,14 +296,14 @@ class GTranslate
 		return $languages;
 	}
 
-        /**
-        * Magic method to understande translation comman
-	* Evaluates methods like language_to_language
-        * @access public
-	* @param String $name
-        * @param Array $args
-        * returns String $response Translated Text
-        */
+	/**
+	 * Magic method to understande translation comman
+	 * Evaluates methods like language_to_language
+	 * @access public
+	 * @param String $name
+	 * @param Array $args
+	 * returns String $response Translated Text
+	 */
 
 
 	public function __call($name,$args)

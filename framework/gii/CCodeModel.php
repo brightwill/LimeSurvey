@@ -123,7 +123,7 @@ abstract class CCodeModel extends CFormModel
 	/**
 	 * @var array user confirmations on whether to overwrite existing code files with the newly generated ones.
 	 * The value of this property is internally managed by this class and {@link CCodeGenerator}.
-	 */
+	*/
 	public $answers;
 	/**
 	 * @var string the name of the code template that the user has selected.
@@ -138,7 +138,7 @@ abstract class CCodeModel extends CFormModel
 	/**
 	 * @var integer the status of this model. T
 	 * The value of this property is internally managed by {@link CCodeGenerator}.
-	 */
+	*/
 	public $status=self::STATUS_NEW;
 
 	private $_stickyAttributes=array();
@@ -147,7 +147,7 @@ abstract class CCodeModel extends CFormModel
 	 * Prepares the code files to be generated.
 	 * This is the main method that child classes should implement. It should contain the logic
 	 * that populates the {@link files} property with a list of code files to be generated.
-	 */
+	*/
 	abstract public function prepare();
 
 	/**
@@ -159,7 +159,7 @@ abstract class CCodeModel extends CFormModel
 	 * ));
 	 * </pre>
 	 * @return array validation rules
-	 */
+	*/
 	public function rules()
 	{
 		return array(
@@ -296,7 +296,7 @@ abstract class CCodeModel extends CFormModel
 	public function confirmed($file)
 	{
 		return $this->answers===null && $file->operation===CCodeFile::OP_NEW
-			|| is_array($this->answers) && isset($this->answers[md5($file->path)]);
+		|| is_array($this->answers) && isset($this->answers[md5($file->path)]);
 	}
 
 	/**

@@ -650,7 +650,7 @@ class CDbCommandBuilder extends CComponent
 		{
 			if(!isset($table->columns[$columnName]))
 				throw new CDbException(Yii::t('yii','Table "{table}" does not have a column named "{column}".',
-				array('{table}'=>$table->name, '{column}'=>$columnName)));
+					array('{table}'=>$table->name, '{column}'=>$columnName)));
 			$column=$table->columns[$columnName];
 
 			foreach($values as &$value)
@@ -670,7 +670,7 @@ class CDbCommandBuilder extends CComponent
 			{
 				if(!isset($table->columns[$name]))
 					throw new CDbException(Yii::t('yii','Table "{table}" does not have a column named "{column}".',
-					array('{table}'=>$table->name, '{column}'=>$name)));
+						array('{table}'=>$table->name, '{column}'=>$name)));
 
 				for($i=0;$i<$n;++$i)
 				{

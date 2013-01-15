@@ -82,7 +82,7 @@ class CMemCache extends CCache
 	 * This method is required by the {@link IApplicationComponent} interface.
 	 * It creates the memcache instance and adds memcache servers.
 	 * @throws CException if memcache extension is not loaded
-	 */
+	*/
 	public function init()
 	{
 		parent::init();

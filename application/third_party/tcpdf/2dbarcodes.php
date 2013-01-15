@@ -63,7 +63,7 @@ class TCPDF2DBarcode {
 	 * <li>$arrcode['num_cols'] required number of columns</li>
 	 * <li>$arrcode['bcode'][$r][$c] value of the cell is $r row and $c column (0 = transparent, 1 = black)</li></ul>
 	 * @param $code (string) code to print
- 	 * @param $type (string) type of barcode: <ul><li>DATAMATRIX : Datamatrix (ISO/IEC 16022)</li><li>PDF417 : PDF417 (ISO/IEC 15438:2006)</li><li>PDF417,a,e,t,s,f,o0,o1,o2,o3,o4,o5,o6 : PDF417 with parameters: a = aspect ratio (width/height); e = error correction level (0-8); t = total number of macro segments; s = macro segment index (0-99998); f = file ID; o0 = File Name (text); o1 = Segment Count (numeric); o2 = Time Stamp (numeric); o3 = Sender (text); o4 = Addressee (text); o5 = File Size (numeric); o6 = Checksum (numeric). NOTES: Parameters t, s and f are required for a Macro Control Block, all other parametrs are optional. To use a comma character ',' on text options, replace it with the character 255: "\xff".</li><li>QRCODE : QRcode Low error correction</li><li>QRCODE,L : QRcode Low error correction</li><li>QRCODE,M : QRcode Medium error correction</li><li>QRCODE,Q : QRcode Better error correction</li><li>QRCODE,H : QR-CODE Best error correction</li><li>RAW: raw mode - comma-separad list of array rows</li><li>RAW2: raw mode - array rows are surrounded by square parenthesis.</li><li>TEST : Test matrix</li></ul>
+	 * @param $type (string) type of barcode: <ul><li>DATAMATRIX : Datamatrix (ISO/IEC 16022)</li><li>PDF417 : PDF417 (ISO/IEC 15438:2006)</li><li>PDF417,a,e,t,s,f,o0,o1,o2,o3,o4,o5,o6 : PDF417 with parameters: a = aspect ratio (width/height); e = error correction level (0-8); t = total number of macro segments; s = macro segment index (0-99998); f = file ID; o0 = File Name (text); o1 = Segment Count (numeric); o2 = Time Stamp (numeric); o3 = Sender (text); o4 = Addressee (text); o5 = File Size (numeric); o6 = Checksum (numeric). NOTES: Parameters t, s and f are required for a Macro Control Block, all other parametrs are optional. To use a comma character ',' on text options, replace it with the character 255: "\xff".</li><li>QRCODE : QRcode Low error correction</li><li>QRCODE,L : QRcode Low error correction</li><li>QRCODE,M : QRcode Medium error correction</li><li>QRCODE,Q : QRcode Better error correction</li><li>QRCODE,H : QR-CODE Best error correction</li><li>RAW: raw mode - comma-separad list of array rows</li><li>RAW2: raw mode - array rows are surrounded by square parenthesis.</li><li>TEST : Test matrix</li></ul>
 	 */
 	public function __construct($code, $type) {
 		$this->setBarcode($code, $type);
@@ -71,7 +71,7 @@ class TCPDF2DBarcode {
 
 	/**
 	 * Return an array representations of barcode.
- 	 * @return array
+	 * @return array
 	 */
 	public function getBarcodeArray() {
 		return $this->barcode_array;
@@ -82,7 +82,7 @@ class TCPDF2DBarcode {
 	 * @param $w (int) Width of a single rectangle element in user units.
 	 * @param $h (int) Height of a single rectangle element in user units.
 	 * @param $color (string) Foreground color (in SVG format) for bar elements (background is transparent).
- 	 * @public
+	 * @public
 	 */
 	public function getBarcodeSVG($w=3, $h=3, $color='black') {
 		// send headers
@@ -102,8 +102,8 @@ class TCPDF2DBarcode {
 	 * @param $w (int) Width of a single rectangle element in user units.
 	 * @param $h (int) Height of a single rectangle element in user units.
 	 * @param $color (string) Foreground color (in SVG format) for bar elements (background is transparent).
- 	 * @return string SVG code.
- 	 * @public
+	 * @return string SVG code.
+	 * @public
 	 */
 	public function getBarcodeSVGcode($w=3, $h=3, $color='black') {
 		// replace table for special characters
@@ -138,8 +138,8 @@ class TCPDF2DBarcode {
 	 * @param $w (int) Width of a single rectangle element in pixels.
 	 * @param $h (int) Height of a single rectangle element in pixels.
 	 * @param $color (string) Foreground color for bar elements (background is transparent).
- 	 * @return string HTML code.
- 	 * @public
+	 * @return string HTML code.
+	 * @public
 	 */
 	public function getBarcodeHTML($w=10, $h=10, $color='black') {
 		// replace table for special characters
@@ -168,8 +168,8 @@ class TCPDF2DBarcode {
 	 * @param $w (int) Width of a single rectangle element in pixels.
 	 * @param $h (int) Height of a single rectangle element in pixels.
 	 * @param $color (array) RGB (0-255) foreground color for bar elements (background is transparent).
- 	 * @return image or false in case of error.
- 	 * @public
+	 * @return image or false in case of error.
+	 * @public
 	 */
 	public function getBarcodePNG($w=3, $h=3, $color=array(0,0,0)) {
 		// calculate image size
@@ -230,8 +230,8 @@ class TCPDF2DBarcode {
 	/**
 	 * Set the barcode.
 	 * @param $code (string) code to print
- 	 * @param $type (string) type of barcode: <ul><li>DATAMATRIX : Datamatrix (ISO/IEC 16022)</li><li>PDF417 : PDF417 (ISO/IEC 15438:2006)</li><li>PDF417,a,e,t,s,f,o0,o1,o2,o3,o4,o5,o6 : PDF417 with parameters: a = aspect ratio (width/height); e = error correction level (0-8); t = total number of macro segments; s = macro segment index (0-99998); f = file ID; o0 = File Name (text); o1 = Segment Count (numeric); o2 = Time Stamp (numeric); o3 = Sender (text); o4 = Addressee (text); o5 = File Size (numeric); o6 = Checksum (numeric). NOTES: Parameters t, s and f are required for a Macro Control Block, all other parametrs are optional. To use a comma character ',' on text options, replace it with the character 255: "\xff".</li><li>QRCODE : QRcode Low error correction</li><li>QRCODE,L : QRcode Low error correction</li><li>QRCODE,M : QRcode Medium error correction</li><li>QRCODE,Q : QRcode Better error correction</li><li>QRCODE,H : QR-CODE Best error correction</li><li>RAW: raw mode - comma-separad list of array rows</li><li>RAW2: raw mode - array rows are surrounded by square parenthesis.</li><li>TEST : Test matrix</li></ul>
- 	 * @return array
+	 * @param $type (string) type of barcode: <ul><li>DATAMATRIX : Datamatrix (ISO/IEC 16022)</li><li>PDF417 : PDF417 (ISO/IEC 15438:2006)</li><li>PDF417,a,e,t,s,f,o0,o1,o2,o3,o4,o5,o6 : PDF417 with parameters: a = aspect ratio (width/height); e = error correction level (0-8); t = total number of macro segments; s = macro segment index (0-99998); f = file ID; o0 = File Name (text); o1 = Segment Count (numeric); o2 = Time Stamp (numeric); o3 = Sender (text); o4 = Addressee (text); o5 = File Size (numeric); o6 = Checksum (numeric). NOTES: Parameters t, s and f are required for a Macro Control Block, all other parametrs are optional. To use a comma character ',' on text options, replace it with the character 255: "\xff".</li><li>QRCODE : QRcode Low error correction</li><li>QRCODE,L : QRcode Low error correction</li><li>QRCODE,M : QRcode Medium error correction</li><li>QRCODE,Q : QRcode Better error correction</li><li>QRCODE,H : QR-CODE Best error correction</li><li>RAW: raw mode - comma-separad list of array rows</li><li>RAW2: raw mode - array rows are surrounded by square parenthesis.</li><li>TEST : Test matrix</li></ul>
+	 * @return array
 	 */
 	public function setBarcode($code, $type) {
 		$mode = explode(',', $type);

@@ -351,15 +351,15 @@ class CJoinElement
 	public $records=array();
 	/**
 	 * @var array list of child join elements
-	 */
+	*/
 	public $children=array();
 	/**
 	 * @var array list of stat elements
-	 */
+	*/
 	public $stats=array();
 	/**
 	 * @var string table alias for this join element
-	 */
+	*/
 	public $tableAlias;
 	/**
 	 * @var string the quoted table alias for this element
@@ -382,7 +382,7 @@ class CJoinElement
 	 * or the model (if the third parameter is null) associated with this tree node.
 	 * @param CJoinElement $parent the parent tree node
 	 * @param integer $id the ID of this tree node that is unique among all the tree nodes
-	 */
+	*/
 	public function __construct($finder,$relation,$parent=null,$id=0)
 	{
 		$this->_finder=$finder;
@@ -490,13 +490,13 @@ class CJoinElement
 		{
 			case 0:
 				return;
-			break;
+				break;
 			case 1:
 				$child=reset($this->children);
-			break;
+				break;
 			default: // bridge(s) inside
 				$child=end($this->children);
-			break;
+				break;
 		}
 
 		$query=new CJoinQuery($child);
@@ -981,7 +981,7 @@ class CJoinElement
 			{
 				foreach($this->_table->primaryKey as $name)
 					if(!isset($selected[$name]))
-						$columns[]=$prefix.$schema->quoteColumnName($name).' AS '.$schema->quoteColumnName($this->_pkAlias[$name]);
+					$columns[]=$prefix.$schema->quoteColumnName($name).' AS '.$schema->quoteColumnName($this->_pkAlias[$name]);
 			}
 		}
 
@@ -1218,7 +1218,7 @@ class CJoinQuery
 	public $selects=array();
 	/**
 	 * @var boolean whether to select distinct result set
-	 */
+	*/
 	public $distinct=false;
 	/**
 	 * @var array list of join statement
@@ -1226,23 +1226,23 @@ class CJoinQuery
 	public $joins=array();
 	/**
 	 * @var array list of WHERE clauses
-	 */
+	*/
 	public $conditions=array();
 	/**
 	 * @var array list of ORDER BY clauses
-	 */
+	*/
 	public $orders=array();
 	/**
 	 * @var array list of GROUP BY clauses
-	 */
+	*/
 	public $groups=array();
 	/**
 	 * @var array list of HAVING clauses
-	 */
+	*/
 	public $havings=array();
 	/**
 	 * @var integer row limit
-	 */
+	*/
 	public $limit=-1;
 	/**
 	 * @var integer row offset
@@ -1254,14 +1254,14 @@ class CJoinQuery
 	public $params=array();
 	/**
 	 * @var array list of join element IDs (id=>true)
-	 */
+	*/
 	public $elements=array();
 
 	/**
 	 * Constructor.
 	 * @param CJoinElement $joinElement The root join tree.
 	 * @param CDbCriteria $criteria the query criteria
-	 */
+	*/
 	public function __construct($joinElement,$criteria=null)
 	{
 		if($criteria!==null)
@@ -1328,28 +1328,28 @@ class CJoinQuery
 		$conditions=array();
 		foreach($this->conditions as $condition)
 			if($condition!=='')
-				$conditions[]=$condition;
+			$conditions[]=$condition;
 		if($conditions!==array())
 			$sql.=' WHERE (' . implode(') AND (',$conditions).')';
 
 		$groups=array();
 		foreach($this->groups as $group)
 			if($group!=='')
-				$groups[]=$group;
+			$groups[]=$group;
 		if($groups!==array())
 			$sql.=' GROUP BY ' . implode(', ',$groups);
 
 		$havings=array();
 		foreach($this->havings as $having)
 			if($having!=='')
-				$havings[]=$having;
+			$havings[]=$having;
 		if($havings!==array())
 			$sql.=' HAVING (' . implode(') AND (',$havings).')';
 
 		$orders=array();
 		foreach($this->orders as $order)
 			if($order!=='')
-				$orders[]=$order;
+			$orders[]=$order;
 		if($orders!==array())
 			$sql.=' ORDER BY ' . implode(', ',$orders);
 
@@ -1416,7 +1416,7 @@ class CStatElement
 		$fks=preg_split('/\s*,\s*/',$relation->foreignKey,-1,PREG_SPLIT_NO_EMPTY);
 		if(count($fks)!==count($pkTable->primaryKey))
 			throw new CDbException(Yii::t('yii','The relation "{relation}" in active record class "{class}" is specified with an invalid foreign key. The columns in the key must match the primary keys of the table "{table}".',
-						array('{class}'=>get_class($parent->model), '{relation}'=>$relation->name, '{table}'=>$pkTable->name)));
+				array('{class}'=>get_class($parent->model), '{relation}'=>$relation->name, '{table}'=>$pkTable->name)));
 
 		// set up mapping between fk and pk columns
 		$map=array();  // pk=>fk
@@ -1462,7 +1462,7 @@ class CStatElement
 		{
 			$col=$table->columns[$fks[0]]->rawName;
 			$sql="SELECT $col AS $c, {$relation->select} AS $s FROM {$table->rawName} ".$tableAlias.$join
-				.$where.'('.$builder->createInCondition($table,$fks[0],array_keys($records),$tableAlias.'.').')'
+			.$where.'('.$builder->createInCondition($table,$fks[0],array_keys($records),$tableAlias.'.').')'
 				." GROUP BY $col".$group
 				.$having.$order;
 			$command=$builder->getDbConnection()->createCommand($sql);
@@ -1489,7 +1489,7 @@ class CStatElement
 				$cols[$name]=$name.' AS '.$schema->quoteColumnName('c'.$n);
 			}
 			$sql='SELECT '.implode(', ',$cols).", {$relation->select} AS $s FROM {$table->rawName} ".$tableAlias.$join
-				.$where.'('.$builder->createInCondition($table,$fks,$keys,$tableAlias.'.').')'
+			.$where.'('.$builder->createInCondition($table,$fks,$keys,$tableAlias.'.').')'
 				.' GROUP BY '.implode(', ',array_keys($cols)).$group
 				.$having.$order;
 			$command=$builder->getDbConnection()->createCommand($sql);
@@ -1512,8 +1512,8 @@ class CStatElement
 
 	/*
 	 * @param string $joinTableName jointablename
-	 * @param string $keys keys
-	 */
+	* @param string $keys keys
+	*/
 	private function queryManyMany($joinTableName,$keys)
 	{
 		$relation=$this->relation;
@@ -1616,11 +1616,11 @@ class CStatElement
 		$order=empty($relation->order)?'' : ' ORDER BY '.$relation->order;
 
 		$sql='SELECT '.$this->relation->select.' AS '.$schema->quoteColumnName('s').', '.implode(', ',$cols)
-			.' FROM '.$table->rawName.' '.$tableAlias.' INNER JOIN '.$joinTable->rawName
-			.' ON ('.implode(') AND (',$joinCondition).')'.$join
-			.$where
-			.' GROUP BY '.implode(', ',array_keys($cols)).$group
-			.' HAVING ('.$builder->createInCondition($joinTable,$map,$keys).')'
+		.' FROM '.$table->rawName.' '.$tableAlias.' INNER JOIN '.$joinTable->rawName
+		.' ON ('.implode(') AND (',$joinCondition).')'.$join
+		.$where
+		.' GROUP BY '.implode(', ',array_keys($cols)).$group
+		.' HAVING ('.$builder->createInCondition($joinTable,$map,$keys).')'
 			.$having.$order;
 
 		$command=$builder->getDbConnection()->createCommand($sql);

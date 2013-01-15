@@ -29,7 +29,7 @@ abstract class CDbSchema extends CComponent
 	 * @var array the abstract column types mapped to physical column types.
 	 * @since 1.1.6
 	 */
-    public $columnTypes=array();
+	public $columnTypes=array();
 
 	private $_tableNames=array();
 	private $_tables=array();
@@ -41,13 +41,13 @@ abstract class CDbSchema extends CComponent
 	 * Loads the metadata for the specified table.
 	 * @param string $name table name
 	 * @return CDbTableSchema driver dependent table metadata, null if the table does not exist.
-	 */
+	*/
 	abstract protected function loadTable($name);
 
 	/**
 	 * Constructor.
 	 * @param CDbConnection $conn database connection.
-	 */
+	*/
 	public function __construct($conn)
 	{
 		$this->_connection=$conn;
@@ -336,18 +336,18 @@ abstract class CDbSchema extends CComponent
 	 * @return string physical column type.
 	 * @since 1.1.6
 	 */
-    public function getColumnType($type)
-    {
-    	if(isset($this->columnTypes[$type]))
-    		return $this->columnTypes[$type];
-    	else if(($pos=strpos($type,' '))!==false)
-    	{
-    		$t=substr($type,0,$pos);
-    		return (isset($this->columnTypes[$t]) ? $this->columnTypes[$t] : $t).substr($type,$pos);
-    	}
-    	else
-    		return $type;
-    }
+	public function getColumnType($type)
+	{
+		if(isset($this->columnTypes[$type]))
+			return $this->columnTypes[$type];
+		else if(($pos=strpos($type,' '))!==false)
+		{
+			$t=substr($type,0,$pos);
+			return (isset($this->columnTypes[$t]) ? $this->columnTypes[$t] : $t).substr($type,$pos);
+		}
+		else
+			return $type;
+	}
 
 	/**
 	 * Builds a SQL statement for creating a new DB table.
@@ -427,7 +427,7 @@ abstract class CDbSchema extends CComponent
 	public function addColumn($table, $column, $type)
 	{
 		return 'ALTER TABLE ' . $this->quoteTableName($table)
-			. ' ADD ' . $this->quoteColumnName($column) . ' '
+		. ' ADD ' . $this->quoteColumnName($column) . ' '
 			. $this->getColumnType($type);
 	}
 
@@ -441,7 +441,7 @@ abstract class CDbSchema extends CComponent
 	public function dropColumn($table, $column)
 	{
 		return "ALTER TABLE ".$this->quoteTableName($table)
-			." DROP COLUMN ".$this->quoteColumnName($column);
+		." DROP COLUMN ".$this->quoteColumnName($column);
 	}
 
 	/**
@@ -455,8 +455,8 @@ abstract class CDbSchema extends CComponent
 	public function renameColumn($table, $name, $newName)
 	{
 		return "ALTER TABLE ".$this->quoteTableName($table)
-			. " RENAME COLUMN ".$this->quoteColumnName($name)
-			. " TO ".$this->quoteColumnName($newName);
+		. " RENAME COLUMN ".$this->quoteColumnName($name)
+		. " TO ".$this->quoteColumnName($newName);
 	}
 
 	/**
@@ -473,8 +473,8 @@ abstract class CDbSchema extends CComponent
 	{
 		return 'ALTER TABLE ' . $this->quoteTableName($table) . ' CHANGE '
 			. $this->quoteColumnName($column) . ' '
-			. $this->quoteColumnName($column) . ' '
-			. $this->getColumnType($type);
+				. $this->quoteColumnName($column) . ' '
+					. $this->getColumnType($type);
 	}
 
 	/**
@@ -499,8 +499,8 @@ abstract class CDbSchema extends CComponent
 		foreach($refColumns as $i=>$col)
 			$refColumns[$i]=$this->quoteColumnName($col);
 		$sql='ALTER TABLE '.$this->quoteTableName($table)
-			.' ADD CONSTRAINT '.$this->quoteColumnName($name)
-			.' FOREIGN KEY ('.implode(', ', $columns).')'
+		.' ADD CONSTRAINT '.$this->quoteColumnName($name)
+		.' FOREIGN KEY ('.implode(', ', $columns).')'
 			.' REFERENCES '.$this->quoteTableName($refTable)
 			.' ('.implode(', ', $refColumns).')';
 		if($delete!==null)
@@ -520,7 +520,7 @@ abstract class CDbSchema extends CComponent
 	public function dropForeignKey($name, $table)
 	{
 		return 'ALTER TABLE '.$this->quoteTableName($table)
-			.' DROP CONSTRAINT '.$this->quoteColumnName($name);
+		.' DROP CONSTRAINT '.$this->quoteColumnName($name);
 	}
 
 	/**
@@ -545,7 +545,7 @@ abstract class CDbSchema extends CComponent
 				$cols[]=$this->quoteColumnName($col);
 		}
 		return ($unique ? 'CREATE UNIQUE INDEX ' : 'CREATE INDEX ')
-			. $this->quoteTableName($name).' ON '
+		. $this->quoteTableName($name).' ON '
 			. $this->quoteTableName($table).' ('.implode(', ',$cols).')';
 	}
 

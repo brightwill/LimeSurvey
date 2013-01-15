@@ -1,17 +1,17 @@
 <?php
 /*
  * LimeSurvey
- * Copyright (C) 2007-2011 The LimeSurvey Project Team / Carsten Schmitz
- * All rights reserved.
- * License: GNU/GPL License v2 or later, see LICENSE.php
- * LimeSurvey is free software. This version may have been modified pursuant
- * to the GNU General Public License, and as distributed it includes or
- * is derivative of works licensed under the GNU General Public License or
- * other free or open source software licenses.
- * See COPYRIGHT.php for copyright notices and details.
- *
- *	$Id$
- */
+* Copyright (C) 2007-2011 The LimeSurvey Project Team / Carsten Schmitz
+* All rights reserved.
+* License: GNU/GPL License v2 or later, see LICENSE.php
+* LimeSurvey is free software. This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*
+*	$Id$
+*/
 /**
  * This is the model class for table "{{participant_shares}}".
  *
@@ -28,7 +28,7 @@ class ParticipantShares extends CActiveRecord
 	 *
 	 * @static
 	 * @access public
-     * @param string $class
+	 * @param string $class
 	 * @return CActiveRecord
 	 */
 	public static function model($class = __CLASS__)
@@ -108,34 +108,34 @@ class ParticipantShares extends CActiveRecord
 	}
 
 	public function storeParticipantShare($data)
-    {
+	{
 		$ownerid = Yii::app()->db->createCommand()->select('*')->from('{{participants}}')->where('participant_id = :participant_id')->bindParam(":participant_id", $data['participant_id'], PDO::PARAM_STR)->queryRow();
 		if($ownerid['owner_uid'] != $data['share_uid'])// A check to ensure that the participant is not added to it's owner
 		{
 			Yii::app()->db->createCommand()->insert('{{participant_shares}}',$data);
 		}
-    }
+	}
 
-    function updateShare($data)
-    {
-        list($participantId, $shareuid)=explode("--", $data['participant_id']);
-        $updatedata=array("participant_id"=>$participantId, "share_uid"=>$data['share_uid'], "can_edit"=>$data['can_edit']);
-        $criteria = new CDbCriteria;
-        $criteria->addCondition("participant_id = '$participantId'");
+	function updateShare($data)
+	{
+		list($participantId, $shareuid)=explode("--", $data['participant_id']);
+		$updatedata=array("participant_id"=>$participantId, "share_uid"=>$data['share_uid'], "can_edit"=>$data['can_edit']);
+		$criteria = new CDbCriteria;
+		$criteria->addCondition("participant_id = '$participantId'");
 		$criteria->addCondition("share_uid = '$shareuid' ");
-        ParticipantShares::model()->updateAll($updatedata,$criteria);
-    }
+		ParticipantShares::model()->updateAll($updatedata,$criteria);
+	}
 
-    function deleteRow($rows)
-    {
+	function deleteRow($rows)
+	{
 		// Converting the comma seperated id's to an array to delete multiple rows
 		$rowid=explode(",",$rows);
-        foreach($rowid as $row)
+		foreach($rowid as $row)
 		{
-            list($participantId, $uId)=explode("--", $row);
+			list($participantId, $uId)=explode("--", $row);
 			Yii::app()->db
-                      ->createCommand()
-                      ->delete('{{participant_shares}}',"participant_id = '$participantId' AND share_uid = $uId");
-	    }
+			->createCommand()
+			->delete('{{participant_shares}}',"participant_id = '$participantId' AND share_uid = $uId");
+		}
 	}
 }

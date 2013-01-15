@@ -17,29 +17,29 @@
 defined('YII_BEGIN_TIME') or define('YII_BEGIN_TIME',microtime(true));
 /**
  * This constant defines whether the application should be in debug mode or not. Defaults to false.
- */
+*/
 defined('YII_DEBUG') or define('YII_DEBUG',false);
 /**
  * This constant defines how much call stack information (file name and line number) should be logged by Yii::trace().
  * Defaults to 0, meaning no backtrace information. If it is greater than 0,
  * at most that number of call stacks will be logged. Note, only user application call stacks are considered.
- */
+*/
 defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',0);
 /**
  * This constant defines whether exception handling should be enabled. Defaults to true.
- */
+*/
 defined('YII_ENABLE_EXCEPTION_HANDLER') or define('YII_ENABLE_EXCEPTION_HANDLER',true);
 /**
  * This constant defines whether error handling should be enabled. Defaults to true.
- */
+*/
 defined('YII_ENABLE_ERROR_HANDLER') or define('YII_ENABLE_ERROR_HANDLER',true);
 /**
  * Defines the Yii framework installation path.
- */
+*/
 defined('YII_PATH') or define('YII_PATH',dirname(__FILE__));
 /**
  * Defines the Zii library installation path.
- */
+*/
 defined('YII_ZII_PATH') or define('YII_ZII_PATH',YII_PATH.DIRECTORY_SEPARATOR.'zii');
 
 /**
@@ -52,7 +52,7 @@ defined('YII_ZII_PATH') or define('YII_ZII_PATH',YII_PATH.DIRECTORY_SEPARATOR.'z
  * @version $Id: YiiBase.php 3564 2012-02-13 01:29:03Z qiang.xue $
  * @package system
  * @since 1.0
- */
+*/
 class YiiBase
 {
 	/**
@@ -66,7 +66,7 @@ class YiiBase
 	 * You may set this to be false if your hosting environment doesn't allow changing PHP include path,
 	 * or if you want to append additional autoloaders to the default Yii autoloader.
 	 * @since 1.1.8
-	 */
+	*/
 	public static $enableIncludePath=true;
 
 	private static $_aliases=array('system'=>YII_PATH,'zii'=>YII_ZII_PATH); // alias => path
